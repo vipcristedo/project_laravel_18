@@ -11,15 +11,33 @@
 |
 */
 
-Route::get('/','Backend\DashboardController@index');
+Route::get('/','Frontend\HomeController@index');
 Route::group([
 	'prefix'=>'admin',
 	'namespace'=>'Backend'
 ],function(){
-	Route::get('/dashboard','DashboardController@index')->name('backend.dashboard');
-	Route::get('/user/index','UserController@index')->name('backend.user.index');
-	Route::get('/user/create','UserController@create')->name('backend.user.create');
-	Route::get('/product/index','ProductController@index')->name('backend.product.index');
-	Route::get('/product/create','ProductController@create')->name('backend.product.create');
-	Route::get('/category/index','CategoryController@index')->name('backend.category.index');
+	Route::get('/','DashboardController@index')->name('backend.dashboard');
+
+	Route::group([
+		'prefix'=>'user',
+		'namespace'=>'User'
+	],function(){
+		Route::get('/index','UserController@index')->name('backend.user.index');
+		Route::get('/create','UserController@create')->name('backend.user.create');
+	});
+
+	Route::group([
+		'prefix'=>'product',
+		'namespace'=>'Product'
+	],function(){
+		Route::get('/index','ProductController@index')->name('backend.product.index');
+		Route::get('/create','ProductController@create')->name('backend.product.create');
+	});
+
+	Route::group([
+		'prefix'=>'category',
+		'namespace'=>'Category'
+	],function(){
+		Route::get('/index','CategoryController@index')->name('backend.category.index');
+	});
 });
