@@ -55,6 +55,7 @@ Danh sách hạng mục
                                 <th>Tên danh mục</th>
                                 <th>Thời gian tạo</th>
                                 <th>Parent ID</th>
+                                <th>Act</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -65,6 +66,9 @@ Danh sách hạng mục
                                 <td>{{$category->name}}</td>
                                 <td>{{$category->created_at}}</td>
                                 <td>{{$category->parent_id}}</td>
+                                <td>
+                                    <a href="{{ route('backend.category.showProducts',$category->id)}}" class="btn btn-success">Sản phẩm</a>
+                                </td>
                             </tr>
                             @endforeach
                             </tbody>

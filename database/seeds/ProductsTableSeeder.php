@@ -22,7 +22,6 @@ class ProductsTableSeeder extends Seeder
         	'sale_price'=>'9000',
         	'user_id'=>'1',
         	'category_id'=>'1',
-        	'tags_id'=>'1,2,3',
         	'amount'=>'100'
         ]);
     	}

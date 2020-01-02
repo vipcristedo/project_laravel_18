@@ -52,20 +52,24 @@ Danh sách sản phẩm
                             <thead>
                             <tr>
                                 <th>STT</th>
-                                <th>ID</th>
                                 <th>Tên sản phẩm</th>
-                                <th>Thời gian tạo</th>
+                                <th>Số lượng</th>
                                 <th>Mô tả</th>
+                                <th>Act</th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($products as $key => $product)
                             <tr>
                                 <td>{{$key+1}}</td>
-                                <td>{{$product->id}}</td>
                                 <td>{{$product->name}}</td>
-                                <td>{{$product->created_at}}</td>
+                                <td>{{$product->amount}}</td>
                                 <td>{{$product->content}}</td>
+                                <td>
+                                    <a href="{{ route('backend.product.show',$product->id)}}" class="btn btn-primary">Chi tiết</a>
+                                    <a href="{{ route('backend.product.showImages',$product->id)}}" class="btn btn-success">Ảnh</a>
+                                    <a href="{{ route('backend.product.show',$product->id)}}" class="btn btn-warning">Xóa</a>
+                                </td>
                             </tr>
                             @endforeach
                             </tbody>

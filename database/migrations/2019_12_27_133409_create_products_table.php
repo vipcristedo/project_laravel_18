@@ -22,7 +22,7 @@ class CreateProductsTable extends Migration
             $table->text('content')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('category_id');
-            $table->string('tags_id');
+            
             $table->integer('amount')->default('0');
             $table->integer('rate')->default('5');
             $table->integer('rate_count')->default('1');

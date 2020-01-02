@@ -14,4 +14,18 @@ class ProductController extends Controller
     public function create(){
     	return view('backend.product.create');
     }
+    public function show($id){
+    	$product = Product::find($id);
+    	return view('backend.product.show')->with('product',$product);
+    }
+    public function showImages($product_id){
+    	$images=\App\Product::find($product_id)->images()->paginate(15);
+    	return view('backend.product.images')->with('images',$images);
+    }
+    public function showOrders($product_id){
+    	$orders=\App\Product::find($product_id)->orders;
+    	foreach ($orders as $order) {
+    		echo $order->id.": ".$order->money."<br>";
+    	}
+    }
 }
