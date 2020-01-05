@@ -8,7 +8,7 @@ use App\Order;
 class OrderController extends Controller
 {
     public function showProducts($order_id){
-    	$products= \App\Order::find($order_id)->products;
+    	$products= \App\Order::findOrFail($order_id)->products;
     	foreach ($products as $product) {
     		echo $product->name.': '.$product->sale_price."<br>";
     	}

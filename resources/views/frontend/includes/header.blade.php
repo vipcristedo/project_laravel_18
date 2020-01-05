@@ -21,14 +21,35 @@
 			<ul>
 				<li class="dropdown profile_details_drop">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user" aria-hidden="true"></i><span class="caret"></span></a>
+					@if(null == Auth::user())
 					<div class="mega-dropdown-menu">
 						<div class="w3ls_vegetables">
 							<ul class="dropdown-menu drp-mnu">
-								<li><a href="login.html">Login</a></li> 
+								<li><a href="{{ route('login') }}">Login</a></li> 
 								<li><a href="login.html">Sign Up</a></li>
 							</ul>
 						</div>                  
-					</div>	
+					</div>
+					@else
+					<div class="mega-dropdown-menu">
+						<div class="w3ls_vegetables">
+							<ul class="dropdown-menu drp-mnu">
+								<li><a href="{{ route('logout') }}" class="" onclick="
+                            event.preventDefault();
+                            document.getElementById('logout-form').submit();
+                        ">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <p>
+                                Đăng xuất
+                            </p>
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        </form></li>
+							</ul>
+						</div>                  
+					</div>
+					@endif
 				</li>
 			</ul>
 		</div>
@@ -56,7 +77,7 @@
 	<div class="logo_products">
 		<div class="container">
 			<div class="w3ls_logo_products_left">
-				<h1><a href="index.html"><span>Grocery</span> Store</a></h1>
+				<h1><a href="{{ route('index') }}"><span>Grocery</span> Store</a></h1>
 			</div>
 			<div class="w3ls_logo_products_left1">
 				<ul class="special_items">

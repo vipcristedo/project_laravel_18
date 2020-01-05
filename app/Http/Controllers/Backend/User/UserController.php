@@ -22,8 +22,9 @@ class UserController extends Controller
     public function create(){
     	return view('backend.user.create');
     }
+    
     public function showProducts($user_id){
-        $products=\App\User::find($user_id)->products;
+        $products=\App\User::findOrFail($user_id)->products;
         return view('backend.user.products')->with('products', $products);
     }
     public function test($id){
@@ -46,7 +47,7 @@ class UserController extends Controller
         //     echo $value->name.'<br>';
         // }
 
-        $orders= \App\Product::find($id)->orders;
+        $orders= \App\Product::findOrFail($id)->orders;
         foreach ($orders as $key => $value) {
             echo $value->money.'<br>';
         }

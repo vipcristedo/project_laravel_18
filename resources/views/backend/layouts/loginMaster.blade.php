@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,30 +29,31 @@
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     @yield('css')
 </head>
-<body class="hold-transition sidebar-mini layout-fixed">
-<div class="wrapper">
-    <!-- Navbar -->
-    @include('backend.includes.navbar')
-    <!-- /.navbar -->
+<body class="hold-transition login-page">
 
-    <!-- Main Sidebar Container -->
-    @include('backend.includes.sidebar')
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        @yield('content-header')
-        <!-- /.content-header -->
-
-        <!-- Main content -->
-        @yield('main-content')
-        <!-- /.content -->
+<div class="login-box">
+    <div class="login-logo">
+        <a href="{{ route('index') }}"><b>Grocery</b>Store</a>
     </div>
-    <!-- /.content-wrapper -->
-    @include('backend.includes.footer')
-<!-- /.control-sidebar -->
+    <!-- /.login-logo -->
+    <div class="card">
+        <div class="card-body login-card-body">
+            <p class="login-box-msg">@yield('login-box-msg')</p>
+
+            @yield('content')
+
+            <div class="social-auth-links text-center mb-3">
+                <p>- OR -</p>
+            </div>
+            <!-- /.social-auth-links -->
+
+            @yield('or')
+        </div>
+        <!-- /.login-card-body -->
+    </div>
 </div>
-<!-- ./wrapper -->
-<!-- jQuery -->
+
+
 <script src="/backend/plugins/jquery/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="/backend/plugins/jquery-ui/jquery-ui.min.js"></script>

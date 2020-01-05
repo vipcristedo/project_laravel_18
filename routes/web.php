@@ -11,10 +11,16 @@
 |
 */
 
-Route::get('/','Frontend\HomeController@index');
+//Route::get('/','Frontend\HomeController@index');
+Auth::routes();
+Route::get('/',function(){
+	return view('frontend.index');
+})->name('index');
+
 Route::group([
 	'prefix'=>'admin',
-	'namespace'=>'Backend'
+	'namespace'=>'Backend',
+	'middleware'=>'auth'
 ],function(){
 	Route::get('/','DashboardController@index')->name('backend.dashboard');
 
@@ -25,7 +31,9 @@ Route::group([
 		Route::get('/index','UserController@index')->name('backend.user.index');
 		Route::get('/create','UserController@create')->name('backend.user.create');
 		Route::get('/{id}','UserController@show')->name('backend.user.show');
+
 		Route::get('products/{id}','UserController@showProducts')->name('backend.user.showProducts');
+
 		Route::get('/test/{id}','UserController@test')->name('backend.user.test');
 	});
 
@@ -37,6 +45,7 @@ Route::group([
 		Route::get('/create','ProductController@create')->name('backend.product.create');
 		Route::get('/{id}','ProductController@show')->name('backend.product.show');
 		Route::get('/orders/{id}','ProductController@showOrders')->name('backend.product.showOrders');
+		
 		Route::get('/images/{id}','ProductController@showImages')->name('backend.product.showImages');
 	});
 
@@ -55,3 +64,11 @@ Route::group([
 		Route::get('products/{id}','OrderController@showProducts')->name('backend.order.showProducts');
 	});
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

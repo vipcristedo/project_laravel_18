@@ -44,6 +44,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <body>
 <!-- header -->
 	@include('frontend.includes.header')
+	@yield('product-breadcrumb')
 <!-- //header -->
 <!-- banner -->
 	<div class="banner">
@@ -51,7 +52,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		@yield('banner')
 	</div>
 <!-- banner -->
-	@include('frontend.includes.banner_bottom')
+	@yield('banner-bottom')
 <!-- top-brands -->
 	@yield('content')
 <!-- //fresh-vegetables -->

@@ -10,6 +10,7 @@ class Order extends Model
     protected $fillable=[
     	'money','user_id'
     ];
+    
     public function products(){
     	return $this->belongsToMany(\App\Product::class);	
     }

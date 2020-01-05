@@ -40,6 +40,7 @@ class User extends Authenticatable
     public function userInfor(){
         return $this->hasOne(UserInfor::class, 'user_id','id');
     }
+    
     public function products(){
         return $this->hasMany(\App\Product::class, 'user_id','id');
     }
