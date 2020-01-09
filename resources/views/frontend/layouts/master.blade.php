@@ -1,9 +1,3 @@
-<!--
-author: W3layouts
-author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,19 +10,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 		function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- //for-mobile-apps -->
-<link href="frontend/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-<link href="frontend/css/style.css" rel="stylesheet" type="text/css" media="all" />
+<link href="{{ asset('frontend/css/bootstrap.css') }}" rel="stylesheet" type="text/css" media="all" />
+<link href="{{ asset('frontend/css/style.css') }}" rel="stylesheet" type="text/css" media="all" />
 <!-- font-awesome icons -->
-<link href="frontend/css/font-awesome.css" rel="stylesheet" type="text/css" media="all" /> 
+<link href="{{ asset('frontend/css/font-awesome.css') }}" rel="stylesheet" type="text/css" media="all" /> 
 <!-- //font-awesome icons -->
 <!-- js -->
-<script src="frontend/js/jquery-1.11.1.min.js"></script>
+<script src="{{ asset('frontend/js/jquery-1.11.1.min.js') }}"></script>
 <!-- //js -->
 <link href='//fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,500,500italic,700,700italic' rel='stylesheet' type='text/css'>
 <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
 <!-- start-smoth-scrolling -->
-<script type="text/javascript" src="frontend/js/move-top.js"></script>
-<script type="text/javascript" src="frontend/js/easing.js"></script>
+<script type="text/javascript" src="{{ asset('frontend/js/move-top.js') }}"></script>
+<script type="text/javascript" src="{{ asset('frontend/js/easing.js') }}"></script>
 <script type="text/javascript">
 	jQuery(document).ready(function($) {
 		$(".scroll").click(function(event){		
@@ -63,7 +57,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	@include('frontend.includes.footer')
 <!-- //footer -->
 <!-- Bootstrap Core JavaScript -->
-<script src="frontend/js/bootstrap.min.js"></script>
+<script src="{{ asset('frontend/js/bootstrap.min.js') }}"></script>
 <script>
 $(document).ready(function(){
     $(".dropdown").hover(            
@@ -95,7 +89,7 @@ $(document).ready(function(){
 			});
 	</script>
 <!-- //here ends scrolling icon -->
-<script src="frontend/js/minicart.js"></script>
+<script src="{{ asset('frontend/js/minicart.js') }}"></script>
 <script>
 		paypal.minicart.render();
 

@@ -306,7 +306,7 @@ Tạp Hóa Online
 	</div>
 @endsection
 @section('newletter')
-<div class="newsletter">
+	<div class="newsletter">
 		<div class="container">
 			<div class="w3agile_newsletter_left">
 				<h3>sign up for our newsletter</h3>

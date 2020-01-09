@@ -20,7 +20,7 @@ Danh sách sản phẩm
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="{{ route('backend.dashboard') }}">Home</a></li>
                     <li class="breadcrumb-item"><a href="{{ route('backend.product.index') }}">Sản phẩm</a></li>
-                    <li class="breadcrumb-item active">Tạo sản phẩm</li>
+                    <li class="breadcrumb-item active">Sửa sản phẩm</li>
                 </ol>
             </div><!-- /.col -->
         </div><!-- /.row -->
@@ -36,16 +36,17 @@ Danh sách sản phẩm
                 <!-- general form elements -->
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Tạo sản phẩm</h3>
+                        <h3 class="card-title">Cập nhật sản phẩm {{ $product->name }}</h3>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form role="form" action="{{ route('backend.product.store') }}" method="POST">
+                    <form role="form" action="{{ route('backend.product.update',$product->id) }}" method="POST">
                         @csrf
+                        {{ method_field('PUT') }}
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Tên sản phẩm</label>
-                                <input type="text" class="form-control" id="" placeholder="Điền tên sản phẩm " name="name">
+                                <input type="text" class="form-control" id="" placeholder="Điền tên sản phẩm " name="name" value="{{ $product->name }}">
                                 @error('name')
                                 <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
@@ -54,7 +55,7 @@ Danh sách sản phẩm
                                 <label>Danh mục sản phẩm</label>
                                 <select class="form-control select2" style="width: 100%;" name="category_id">
                                     @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    <option value="{{ $category->id }}" @if($product->category_id==$category->id) selected @endif>{{ $category->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -62,7 +63,7 @@ Danh sách sản phẩm
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label>Giá khuyến mại</label>
-                                        <input type="text" class="form-control" placeholder="Điền giá khuyến mại" name="sale_price">
+                                        <input type="text" class="form-control" placeholder="Điền giá khuyến mại" name="sale_price" value="{{ $product->sale_price }}">
                                         @error('sale_price')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
@@ -71,7 +72,7 @@ Danh sách sản phẩm
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label>Giá gốc</label>
-                                        <input type="text" class="form-control" placeholder="Điền giá gốc" name="origin_price">
+                                        <input type="text" class="form-control" placeholder="Điền giá gốc" name="origin_price" value="{{ $product->origin_price }}">
                                         @error('origin_price')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
@@ -81,7 +82,7 @@ Danh sách sản phẩm
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Mô tả sản phẩm</label>
                                 <textarea class="textarea" placeholder="Place some text here"
-                                style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" name="content"></textarea>
+                                style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" name="content">{!! $product->content !!}</textarea>
                                 @error('content')
                                 <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
@@ -100,7 +101,7 @@ Danh sách sản phẩm
                             </div>
                             <div class="form-group">
                                 <label>Số lượng trong kho</label>
-                                <input type="text" class="form-control" placeholder="Điền số sản phẩm trong kho" name="amount">
+                                <input type="text" class="form-control" placeholder="Điền số sản phẩm trong kho" name="amount" value="{{ $product->amount }}">
                                 @error('amount')
                                 <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
@@ -109,8 +110,8 @@ Danh sách sản phẩm
                         <!-- /.card-body -->
 
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-default">Huỷ bỏ</button>
-                            <button type="submit" class="btn btn-sucess">Tạo mới</button>
+                            <a class="btn btn-default" href="{{ route('backend.product.index') }}">Huỷ bỏ</a>
+                            <button type="submit" class="btn btn-sucess">Cập nhật</button>
                         </div>
                     </form>
                 </div>

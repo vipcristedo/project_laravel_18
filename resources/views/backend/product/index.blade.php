@@ -66,9 +66,16 @@ Danh sách sản phẩm
                                 <td>{{$product->amount}}</td>
                                 <td>{{$product->content}}</td>
                                 <td>
-                                    <a href="{{ route('backend.product.show',$product->id)}}" class="btn btn-primary">Chi tiết</a>
-                                    <a href="{{ route('backend.product.showImages',$product->id)}}" class="btn btn-success">Ảnh</a>
-                                    <a href="{{ route('backend.product.show',$product->id)}}" class="btn btn-warning">Xóa</a>
+                                    <form action="{{ route('backend.product.delete', $product->id ) }}" method="POST">
+                                        {{ csrf_field() }}
+                                        {{ method_field('DELETE') }}
+                                        <a href="{{ route('backend.product.edit',$product->id)}}" class="btn btn-info">Sửa</a>
+                                        <a href="{{ route('backend.product.show',$product->id)}}" class="btn btn-primary">Chi tiết</a>
+                                        <a href="{{ route('backend.product.showImages',$product->id)}}" class="btn btn-success">Ảnh</a>
+                                        <button type="submit" class="btn btn-warning">
+                                            <i class="fa fa-btn fa-trash"></i>Xoá
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                             @endforeach

@@ -1,6 +1,6 @@
 @extends('backend.layouts.master')
 @section('title')
-Danh sách người dùng
+Tạo mới người dùng
 @endsection
 @section('css')
     
@@ -18,8 +18,8 @@ Danh sách người dùng
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item"><a href="#">Người dùng</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('backend.dashboard') }}">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('backend.user.index') }}">Người dùng</a></li>
                     <li class="breadcrumb-item active">Tạo mới</li>
                 </ol>
             </div><!-- /.col -->
@@ -41,26 +41,62 @@ Danh sách người dùng
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form role="form">
+                    <form role="form" action="{{ route('backend.user.store') }}" method="POST">
+                        @csrf
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Tên</label>
-                                <input type="text" class="form-control" id="" placeholder="Tên người dùng">
+                                <input type="text" class="form-control" id="" placeholder="Tên người dùng" name="name">
+                                @error('name')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Email</label>
-                                <input type="email" class="form-control" id="" placeholder="Email">
+                                <input type="email" class="form-control" id="" placeholder="Email" name="email">
+                                @error('email')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                                @if ( Session::has('flash_error') )
+                                <div class="alert alert-danger">{{ Session::get('flash_error') }}</div>
+                                @endif
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-6">
+                                    <label for="exampleInputEmail1">Mật khẩu</label>
+                                    <input type="password" class="form-control" id="" name="password">
+                                </div>
+                                <div class="col-6">
+                                    <label for="exampleInputEmail1">Xác nhận mật khẩu</label>
+                                    <input type="password" class="form-control" id="" name="password_confirmation">
+                                </div>
+                                @error('password')
+                                <div class="col-12">
+                                    <div class="">
+                                        <div class="alert alert-danger col-12">{{ $message }}</div>
+                                    </div>
+                                </div>
+                                @enderror
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Mật khẩu</label>
-                                <input type="password" class="form-control" id="">
+                                <label for="exampleInputEmail1">Địa chỉ</label>
+                                <input type="text" class="form-control" id="" name="address">
+                                @error('address')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Số điện thoại</label>
+                                <input type="text" class="form-control" id="" name="phone">
+                                @error('phone')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label>Quyền</label>
-                                <select class="form-control select2" style="width: 100%;">
-                                    <option>--Chọn quyền---</option>
-                                    <option>Admin</option>
-                                    <option>User</option>
+                                <select class="form-control select2" style="width: 100%;" name="role">
+                                    <option value="1">Admin</option>
+                                    <option value="0">User</option>
                                 </select>
                             </div>
                         </div>

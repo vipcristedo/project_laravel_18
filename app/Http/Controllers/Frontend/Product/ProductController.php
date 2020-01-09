@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Backend\Product;
+namespace App\Http\Controllers\Frontend\Product;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
@@ -12,7 +12,7 @@ use App\Http\Requests\StoreProductRequest;
 class ProductController extends Controller
 {
     public function index(){
-    	$products= Product::orderByRaw('created_at DESC')->paginate(8);
+    	$products= Product::paginate(8);
     	return view('backend.product.index')->with('products', $products);
     }
     public function create(){
@@ -52,7 +52,7 @@ class ProductController extends Controller
 
         $product = new Product();
         $product->name = $request->get('name');
-        $product->slug = \Illuminate\Support\Str::slug($request->get('name').time());
+        $product->slug = \Illuminate\Support\Str::slug($request->get('name'));
         $product->category_id = $request->get('category_id');
         $product->origin_price = $request->get('origin_price');
         $product->sale_price = $request->get('sale_price');
@@ -63,35 +63,9 @@ class ProductController extends Controller
 
         return redirect()->route('backend.product.index');
     }
-
-    public function edit($id){
-        $product=Product::findOrFail($id);
-        $categories=\App\Category::all();
-        return view('backend.product.edit')->with([
-            'product'=>$product,
-            'categories'=>$categories
-        ]);
-    }
-
-    public function update(StoreProductRequest $request,$id){
-        $product=Product::findOrFail($id);
-        
-        $product->name=$request->get('name');
-        $product->slug = \Illuminate\Support\Str::slug($request->get('name').time());
-        $product->category_id = $request->get('category_id');
-        $product->origin_price = $request->get('origin_price');
-        $product->sale_price = $request->get('sale_price');
-        $product->amount = $request->get('amount');
-        $product->user_id = Auth::user()->id;
-        $product->content = $request->get('content');
-        $product->save();
-
-        return redirect()->route('backend.product.index');
-    }
-
     public function show($id){
     	$product = Product::findOrFail($id);
-    	return view('backend.product.show')->with('product',$product);
+    	return view('frontend.product.show')->with('product',$product);
     }
     
     public function showImages($product_id){
@@ -103,11 +77,5 @@ class ProductController extends Controller
     	foreach ($orders as $order) {
     		echo $order->id.": ".$order->money."<br>";
     	}
-    }
-   public function destroy($id)
-    {
-        $product= Product::findOrFail($id);
-        $product->delete();
-        return redirect()->route('backend.product.index');
     }
 }

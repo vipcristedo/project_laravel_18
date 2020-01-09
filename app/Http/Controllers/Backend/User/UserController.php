@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Backend\User;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use App\User;
-
+use App\Http\Requests\StoreUserAdminRequest;
 class UserController extends Controller
 {
     public function index(){
@@ -19,6 +19,7 @@ class UserController extends Controller
 
     	return view('backend.user.index')->with('users', $users);
     }
+
     public function create(){
     	return view('backend.user.create');
     }
@@ -27,6 +28,7 @@ class UserController extends Controller
         $products=\App\User::findOrFail($user_id)->products;
         return view('backend.user.products')->with('products', $products);
     }
+
     public function test($id){
         // $user_infor=User::find($id)->userInfor;
         // dd($user_infor->fullname);
@@ -51,5 +53,20 @@ class UserController extends Controller
         foreach ($orders as $key => $value) {
             echo $value->money.'<br>';
         }
+    }
+    public function store(StoreUserAdminRequest $request){
+        $status = User::where('email',$request->get('email'))->firstOrFail();
+        if ($status != null) {
+            Session::flash('flash_error', 'Email đã tồn tại');
+            return redirect()->route('backend.user.create');
+        }
+        $user = new User();
+        $user->name = $request->get('name');
+        $user->email = $request->get('email');
+        $user->password = bcrypt($request->get('password'));
+        $user->address = $request->get('address');
+        $user->phone = $request->get('phone');
+        $user->role = $request->get('role');
+        $user->save();
     }
 }

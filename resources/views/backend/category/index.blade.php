@@ -67,7 +67,15 @@ Danh sách hạng mục
                                 <td>{{$category->created_at}}</td>
                                 <td>{{$category->parent_id}}</td>
                                 <td>
-                                    <a href="{{ route('backend.category.showProducts',$category->id)}}" class="btn btn-success">Sản phẩm</a>
+                                    <form action="{{ route('backend.category.delete', $category->id ) }}" method="POST">
+                                        {{ csrf_field() }}
+                                        {{ method_field('DELETE') }}
+                                        <a href="{{ route('backend.category.edit',$category->id)}}" class="btn btn-info">Sửa</a>
+                                        <a href="{{ route('backend.category.showProducts',$category->id)}}" class="btn btn-success">Sản phẩm</a>
+                                        <button type="submit" class="btn btn-warning">
+                                            <i class="fa fa-btn fa-trash"></i>Xoá
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                             @endforeach
