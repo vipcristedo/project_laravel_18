@@ -16,7 +16,7 @@ Auth::routes();
 Route::get('/',function(){
 	return view('frontend.index');
 })->name('index');
-
+Route::get('/test','HomeController@test');
 Route::group([
 	'namespace'=>'Frontend'
 ],function(){
@@ -66,6 +66,8 @@ Route::group([
 		Route::get('/orders/{id}','ProductController@showOrders')->name('backend.product.showOrders');
 		Route::delete('/{id}','ProductController@destroy')->name('backend.product.delete');
 		Route::get('/images/{id}','ProductController@showImages')->name('backend.product.showImages');
+		
+		Route::get('/test','ProductController@test');
 	});
 
 	Route::group([

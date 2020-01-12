@@ -90,14 +90,25 @@ Danh sách sản phẩm
                             <div class="form-group">
                                 <label for="exampleInputFile">Hình ảnh sản phẩm</label>
                                 <div class="input-group">
+                                    @foreach($images as $key => $image)
+                                    <img src="/storage/images/{{ $image->name }}" style="max-width: 100px">
+                                    @endforeach
+                                </div>
+                                <div class="input-group">
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="exampleInputFile">
+                                        <input type="file" class="custom-file-input" id="exampleInputFile" name="images[]" multiple >
                                         <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                                     </div>
                                     <div class="input-group-append">
                                         <span class="input-group-text" id="">Upload</span>
                                     </div>
                                 </div>
+                                @error('images')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                                @if ( Session::has('images') )
+                                <div class="alert alert-danger">{{ Session::get('images') }}</div>
+                                @endif
                             </div>
                             <div class="form-group">
                                 <label>Số lượng trong kho</label>

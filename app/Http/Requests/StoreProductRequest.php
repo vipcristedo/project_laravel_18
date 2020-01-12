@@ -32,6 +32,7 @@ class StoreProductRequest extends FormRequest
             'sale_price'=>'required|numeric',
             'amount'=>'required|numeric|min:0',
             'content'=>'required|min:10',
+            'images'=>'required',
         ];
         return $rules;
     }
@@ -39,7 +40,8 @@ class StoreProductRequest extends FormRequest
         $messages=[
             'required' => ':attribute Không được để trống',
             'min' => ':attribute Không được nhỏ hơn :min',
-            'max' => ':attribute Không được lớn hơn :max'
+            'max' => ':attribute Không được lớn hơn :max',
+            'image' => ':attribute Không phải file ảnh',
         ];
         return $messages;
     }
@@ -49,7 +51,8 @@ class StoreProductRequest extends FormRequest
             'origin_price' => 'Giá gốc',
             'sale_price' => 'Giá bán',
             'amount' =>'Số lượng trong kho',
-            'content' =>'Mô tả sản phẩm'
+            'content' =>'Mô tả sản phẩm',
+            'images' =>'Ảnh sản phẩm'
         ];
         return $attributes;
     }

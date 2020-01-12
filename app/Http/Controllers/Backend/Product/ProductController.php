@@ -5,9 +5,12 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Product;
+use App\Image;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Session;
 use App\Http\Requests\StoreProductRequest;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -20,8 +23,12 @@ class ProductController extends Controller
     	return view('backend.product.create')->with([
             'categories'=>$categories
         ]);
+        // Storage::disk('public')->deleteDirectory('images');
+        // dd(1);
     }
     public function store(StoreProductRequest $request){
+
+
         
         // $validator = Validator::make($request->all(),
         //     [
@@ -50,6 +57,16 @@ class ProductController extends Controller
         //         ->withInput();
         // }
 
+            // $path = Storage::disk('public')->putFile('images', $request->file('image'));
+
+            // $file = $request->file('image');
+            // Lưu vào trong thư mục storage
+            // $path = $file->store('public/images');
+        $images = $request->file('images');
+        $status = $this->validateImage($images);
+        if(!$status){
+            return redirect()->route('backend.product.create');
+        }else{
         $product = new Product();
         $product->name = $request->get('name');
         $product->slug = \Illuminate\Support\Str::slug($request->get('name').time());
@@ -60,16 +77,28 @@ class ProductController extends Controller
         $product->user_id = Auth::user()->id;
         $product->content = $request->get('content');
         $product->save();
-
+        foreach ($images as $image) {
+            $image1 = new Image();
+            $image1->name = time().$image->getClientOriginalName();
+            $image1->product_id = $product->id;
+            $image1->type = $image->getClientOriginalExtension();
+            $image1->size = $image->getClientSize();
+            $image->storeAs('public/images',$image1->name);
+            $image1->save();
+        }
         return redirect()->route('backend.product.index');
+        }
     }
 
     public function edit($id){
+
         $product=Product::findOrFail($id);
+        $images=\App\Product::findOrFail($id)->images();
         $categories=\App\Category::all();
         return view('backend.product.edit')->with([
             'product'=>$product,
-            'categories'=>$categories
+            'categories'=>$categories,
+            'images'=>$images
         ]);
     }
 
@@ -95,7 +124,7 @@ class ProductController extends Controller
     }
     
     public function showImages($product_id){
-    	$images=\App\Product::find($product_id)->images()->paginate(15);
+    	$images=\App\Product::findOrFail($product_id)->images()->paginate(15);
     	return view('backend.product.images')->with('images',$images);
     }
     public function showOrders($product_id){
@@ -104,10 +133,32 @@ class ProductController extends Controller
     		echo $order->id.": ".$order->money."<br>";
     	}
     }
-   public function destroy($id)
-    {
+   public function destroy($id){
         $product= Product::findOrFail($id);
         $product->delete();
         return redirect()->route('backend.product.index');
+    }
+
+    public function test(){
+        Storage::disk('local/test')->put('test1.txt', 'hoan');
+        dd('oki ');
+    }
+
+    public function validateImage($images){
+        $flag = true;
+        
+        $alowedType=[
+            'jpg','png','bmp','gif','svg'
+        ];
+        foreach($images as $image){
+            if(!in_array($image->getClientOriginalExtension(), $alowedType)){
+                Session::flash('images', 'Ảnh của sản phẩm upload không phải file jpg, png, bmp, gif, svg');
+                $flag = false;
+            }elseif($image->getClientSize()/1048576>20){
+                Session::flash('images', 'Ảnh của sản phẩm upload vượt quá 20 Mb');
+                $flag = false;
+            }
+        }
+        return $flag;
     }
 }

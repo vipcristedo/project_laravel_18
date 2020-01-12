@@ -48,7 +48,7 @@ Danh sách ảnh sản phẩm
                         </div>
                     </div>
                     <!-- /.card-header -->
-                    <div class="card-body table-responsive p-0">
+                    <div class=" table-responsive p-0">
                         <table class="table table-hover">
                             <thead>
                             <tr>
@@ -61,8 +61,8 @@ Danh sách ảnh sản phẩm
                             @foreach($images as $key => $image)
                             <tr>
                                 <td>{{$key+1}}</td>
-                                <td>{{ $image->name.".".$image->type }}</td>
-                                <td>{{$image->size}}</td>
+                                <td><img src="/storage/images/{{ $image->name }}" style="max-width: 200px"></td>
+                                <td>{{$image->size}} bytes</td>
                             </tr>
                             @endforeach
                             </tbody>

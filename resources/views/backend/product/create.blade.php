@@ -40,7 +40,7 @@ Danh sách sản phẩm
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form role="form" action="{{ route('backend.product.store') }}" method="POST">
+                    <form role="form" action="{{ route('backend.product.store') }}" method="POST" enctype="multipart/form-data" >
                         @csrf
                         <div class="card-body">
                             <div class="form-group">
@@ -90,13 +90,19 @@ Danh sách sản phẩm
                                 <label for="exampleInputFile">Hình ảnh sản phẩm</label>
                                 <div class="input-group">
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="exampleInputFile">
+                                        <input type="file" class="custom-file-input" id="exampleInputFile" name="images[]" multiple >
                                         <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                                     </div>
                                     <div class="input-group-append">
                                         <span class="input-group-text" id="">Upload</span>
                                     </div>
                                 </div>
+                                @error('images')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                                @if ( Session::has('images') )
+                                <div class="alert alert-danger">{{ Session::get('images') }}</div>
+                                @endif
                             </div>
                             <div class="form-group">
                                 <label>Số lượng trong kho</label>
