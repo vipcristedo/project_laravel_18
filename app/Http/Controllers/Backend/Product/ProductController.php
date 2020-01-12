@@ -150,14 +150,18 @@ class ProductController extends Controller
         $alowedType=[
             'jpg','png','bmp','gif','svg'
         ];
+
+        $size = 0;
         foreach($images as $image){
             if(!in_array($image->getClientOriginalExtension(), $alowedType)){
                 Session::flash('images', 'Ảnh của sản phẩm upload không phải file jpg, png, bmp, gif, svg');
-                $flag = false;
-            }elseif($image->getClientSize()/1048576>20){
-                Session::flash('images', 'Ảnh của sản phẩm upload vượt quá 20 Mb');
-                $flag = false;
+                return $flag = false;
             }
+            $size += $image->getClientSize();
+        }
+        if ($size>2*1024*1024) {
+            Session::flash('images', 'Ảnh của sản phẩm upload không vượt quá 2 Mb');
+            return $flag = false;
         }
         return $flag;
     }
