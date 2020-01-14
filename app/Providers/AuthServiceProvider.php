@@ -14,6 +14,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         // 'App\Model' => 'App\Policies\ModelPolicy',
+        'App\Product'=>'App\Policies\ProductPolicy',
     ];
 
     /**
@@ -25,6 +26,9 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
+        // Gate::define('update-product', function($user,$product){
+        //     return $user->id == $product->user_id;
+        // });
         //
     }
 }

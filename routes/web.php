@@ -59,7 +59,9 @@ Route::group([
 		Route::get('/index','ProductController@index')->name('backend.product.index');
 		Route::get('/create','ProductController@create')->name('backend.product.create');
 		Route::post('','ProductController@store')->name('backend.product.store');
-		Route::get('/edit/{id}','ProductController@edit')->name('backend.product.edit');
+
+		Route::get('/edit/{product}','ProductController@edit')->name('backend.product.edit')->middleware('can:update,product');
+		
 		Route::match(['put','patch'],'/{id}','ProductController@update')->name('backend.product.update');
 
 		Route::get('/{id}','ProductController@show')->name('backend.product.show');

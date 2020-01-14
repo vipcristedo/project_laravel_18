@@ -13,12 +13,12 @@ class UsersTableSeeder extends Seeder
     {
     	DB::table('users')->truncate();
 
-    	for ($i=1;$i<=32;$i++){
+    	for ($i=1;$i<=10;$i++){
     	DB::table('users')->insert([
         	'name'=>'admin'.$i,
         	'email'=>'vipcristedo'.$i.'@gmail.com',
         	'password'=>bcrypt('123456'),
-        	'role'=>1,
+        	'role'=>2,
         	'phone'=>'0984701585',
         	'address'=>'AL-HP'
         ]);

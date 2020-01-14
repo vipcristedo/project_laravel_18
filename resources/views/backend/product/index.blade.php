@@ -69,12 +69,16 @@ Danh sách sản phẩm
                                     <form action="{{ route('backend.product.delete', $product->id ) }}" method="POST">
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}
+                                        @can('update',$product)
                                         <a href="{{ route('backend.product.edit',$product->id)}}" class="btn btn-info">Sửa</a>
+                                        @endcan
                                         <a href="{{ route('backend.product.show',$product->id)}}" class="btn btn-primary">Chi tiết</a>
                                         <a href="{{ route('backend.product.showImages',$product->id)}}" class="btn btn-success">Ảnh</a>
+                                        @can('delete',$product)
                                         <button type="submit" class="btn btn-warning">
                                             <i class="fa fa-btn fa-trash"></i>Xoá
                                         </button>
+                                        @endcan
                                     </form>
                                 </td>
                             </tr>
