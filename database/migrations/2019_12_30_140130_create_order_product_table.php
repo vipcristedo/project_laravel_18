@@ -17,6 +17,7 @@ class CreateOrderProductTable extends Migration
             $table->bigIncrements('id');
             $table->integer('order_id');
             $table->integer('product_id');
+            $table->integer('amount');
             $table->timestamps();
             $table->softDeletes();
         });

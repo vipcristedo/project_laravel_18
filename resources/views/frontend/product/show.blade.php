@@ -2,19 +2,20 @@
 @section('title')
 Sản phẩm
 @endsection
-@section('banner')
+@section('banner_content')
 <!-- banner -->
 	<div class="banner">
 		
 		<div class="w3l_banner_nav_right">
-			<div class="w3l_banner_nav_right_banner3">
-				<h3>Best Deals For New Products<span class="blink_me"></span></h3>
-			</div>
 			<div class="agileinfo_single">
-				<h5>charminar pulao basmati rice 5 kg</h5>
-				<div class="col-md-4 agileinfo_single_left">
-					<img id="example" src="{{ asset('frontend/images/76.png')}}" alt=" " class="img-responsive" />
+				<h5>{{ $product->name }}</h5>
+				
+                <div class="col-md-4 agileinfo_single_left">
+					
+					<img src="{{ $image->path }}" style="max-width: 200px" class="img-responsive">
+					
 				</div>
+                
 				<div class="col-md-8 agileinfo_single_right">
 					<div class="rating1">
 						<span class="starRating">
@@ -32,14 +33,11 @@ Sản phẩm
 					</div>
 					<div class="w3agile_description">
 						<h4>Description :</h4>
-						<p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui 
-							officia deserunt mollit anim id est laborum.Duis aute irure dolor in 
-							reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla 
-							pariatur.</p>
+						<p>{{ $product->content }}</p>
 					</div>
 					<div class="snipcart-item block">
 						<div class="snipcart-thumb agileinfo_single_right_snipcart">
-							<h4>$21.00 <span>$25.00</span></h4>
+							<h4>{{ $product->sale_price }}VNĐ <span>{{ $product->origin_price }}VNĐ</span></h4>
 						</div>
 						<div class="snipcart-details agileinfo_single_right_details">
 							<form action="#" method="post">

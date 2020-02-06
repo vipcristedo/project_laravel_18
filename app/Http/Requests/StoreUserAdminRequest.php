@@ -13,7 +13,7 @@ class StoreUserAdminRequest extends FormRequest
      */
     public function authorize()
     {
-        if($this->role==1){
+        if(Auth::user()->role==1||Auth::user()->role==2){
             return true;
         }
         else return false;
@@ -28,7 +28,7 @@ class StoreUserAdminRequest extends FormRequest
     {
         $rules=[
             'name'=>'required|min:5|max:50',
-            'email'=>'required',
+            'email'=>'required|unique',
             'password'=>'required|confirmed|min:6',
             'address'=>'required|min:5|max:50',
             'phone'=>'required|numeric|min:10',
@@ -51,7 +51,8 @@ class StoreUserAdminRequest extends FormRequest
             'min'=>':attribute không được nhỏ hơn :min',
             'max'=>':attribute không được quá :max',
             'confirmed'=>':attribute nhập lại không chính xác',
-            'numeric'=>':attribute phải là số'
+            'numeric'=>':attribute phải là số',
+            'unique'=>':attribute Đã tồn tại'
         ];
         return $messages;
     }

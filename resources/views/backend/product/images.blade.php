@@ -61,7 +61,7 @@ Danh sách ảnh sản phẩm
                             @foreach($images as $key => $image)
                             <tr>
                                 <td>{{$key+1}}</td>
-                                <td><img src="/storage/images/{{ $image->name }}" style="max-width: 200px"></td>
+                                <td><img src="{{ $image->path }}" style="max-width: 200px"></td>
                                 <td>{{$image->size}} bytes</td>
                             </tr>
                             @endforeach

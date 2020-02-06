@@ -68,5 +68,21 @@ class UserController extends Controller
         $user->phone = $request->get('phone');
         $user->role = $request->get('role');
         $user->save();
+        Session::flash('msg', 'Tạo mới người dùng '.$user->name.' thành công');
+        return redirect()->route('backend.user.index');
+    }
+    public function update(StoreUserAdminRequest $request, $id ){
+
+        $user = User::findOrFail($id);
+        $user->role = $request->get('role');
+        $user->save();
+        Session::flash('msg', 'Cập nhật người dùng '.$user->name.' thành công');
+
+        return redirect()->route('backend.user.index');
+    }
+    public function destroy($id){
+        $user = Category::findOrFail($id);
+        $user->delete();
+        return redirect()->route('backend.user.index');
     }
 }

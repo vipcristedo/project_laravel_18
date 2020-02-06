@@ -13,13 +13,25 @@
 
 //Route::get('/','Frontend\HomeController@index');
 Auth::routes();
-Route::get('/',function(){
-	return view('frontend.index');
-})->name('index');
+
 Route::get('/test','HomeController@test');
 Route::group([
 	'namespace'=>'Frontend'
 ],function(){
+	Route::get('/','HomeController@index')->name('index');
+	Route::get('/about','HomeController@about')->name('about');
+	Route::post('/checkout','HomeController@checkout')->name('checkout');
+	Route::get('/show','HomeController@index')->name('show');
+	Route::get('/services','HomeController@services')->name('services');
+
+	Route::group([
+		'prefix'=>'category',
+		'namespace'=>'Category'
+	],function(){
+		Route::get('{category}','CategoryController@products')->name('frontend.category.products');
+	});
+
+	
 	Route::group([
 		'prefix'=>'product',
 		'namespace'=>'Product'
@@ -59,8 +71,9 @@ Route::group([
 		Route::get('/index','ProductController@index')->name('backend.product.index');
 		Route::get('/create','ProductController@create')->name('backend.product.create');
 		Route::post('','ProductController@store')->name('backend.product.store');
+		Route::get('/edit/{product}','ProductController@edit')->name('backend.product.edit');
 
-		Route::get('/edit/{product}','ProductController@edit')->name('backend.product.edit')->middleware('can:update,product');
+		// Route::get('/edit/{product}','ProductController@edit')->name('backend.product.edit')->middleware('can:update,product');
 		
 		Route::match(['put','patch'],'/{id}','ProductController@update')->name('backend.product.update');
 
@@ -92,7 +105,10 @@ Route::group([
 		'prefix'=>'order',
 		'namespace'=>'Order'
 	],function(){
-		Route::get('products/{id}','OrderController@showProducts')->name('backend.order.showProducts');
+		Route::get('/index','OrderController@index')->name('backend.order.index');
+		Route::get('/create','OrderController@index')->name('backend.order.create');
+		Route::get('/products/{id}','OrderController@showProducts')->name('backend.order.showProducts');
+		Route::delete('/{id}','OrderController@destroy')->name('backend.order.delete');
 	});
 });
 

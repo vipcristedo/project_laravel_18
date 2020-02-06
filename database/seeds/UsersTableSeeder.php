@@ -13,7 +13,7 @@ class UsersTableSeeder extends Seeder
     {
     	DB::table('users')->truncate();
 
-    	for ($i=1;$i<=10;$i++){
+    	for ($i=1;$i<=20;$i++){
     	DB::table('users')->insert([
         	'name'=>'admin'.$i,
         	'email'=>'vipcristedo'.$i.'@gmail.com',

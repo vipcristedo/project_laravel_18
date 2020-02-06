@@ -21,10 +21,11 @@ class CategoryController extends Controller
     public function store(StoreCategoryRequest $request ){
     	$category = new Category();
         $category->name = $request->get('name');
-        $category->slug = \Illuminate\Support\Str::slug($request->get('name'));
+        $category->slug = $request->get('slug')==null?\Illuminate\Support\Str::slug($request->get('name').time()):$request->get('slug');
         $category->parent_id = $request->get('parent_id');
         $category->user_id = Auth::user()->id;
         $category->save();
+        Session::flash('msg', 'Tạo mới danh mục '.$category->name.' thành công');
 
         return redirect()->route('backend.category.index');
     }
@@ -42,10 +43,11 @@ class CategoryController extends Controller
 
     	$category = Category::findOrFail($id);
         $category->name = $request->get('name');
-        $category->slug = \Illuminate\Support\Str::slug($request->get('name'));
+        $category->slug = $request->get('slug')==null?\Illuminate\Support\Str::slug($request->get('name').time()):$request->get('slug');
         $category->parent_id = $request->get('parent_id');
         $category->user_id = Auth::user()->id;
         $category->save();
+        Session::flash('msg', 'Cập nhật danh mục '.$category->name.' thành công');
 
         return redirect()->route('backend.category.index');
     }

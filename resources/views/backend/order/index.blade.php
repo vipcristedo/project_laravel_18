@@ -30,12 +30,10 @@ Danh sách sản phẩm
             <div class="container-fluid">
         <!-- Main row -->
         <div class="row">
-
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Sản phẩm {{ $product->name }}</h3>
-
+                        <h3 class="card-title">Sản phẩm mới nhập</h3>
                         <div class="card-tools">
                             <div class="input-group input-group-sm" style="width: 150px;">
                                 <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
@@ -45,13 +43,44 @@ Danh sách sản phẩm
                                 </div>
                             </div>
                         </div>
+
                     </div>
+
                     <!-- /.card-header -->
                     <div class="card-body table-responsive p-0">
-                        <h4>tên sản phẩm</h4>
-                        <div>{!! $product->name !!}</div>
-                        <h4>Nội dung</h4>
-                        <div>{!! $product->content !!}</div>
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>User ID</th>
+                                <th>Tổng tiền</th>
+                                <th>Act</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($orders as $key => $order)
+                            <tr>
+                                <td>{{$key+1}}</td>
+                                <td>{{$order->id}}</td>
+                                <td>{{$order->money}}</td>
+                                <td>
+                                    <form action="{{ route('backend.order.delete', $order->id ) }}" method="POST">
+                                        {{ csrf_field() }}
+                                        {{ method_field('DELETE') }}
+                                        
+                                        <a href="{{ route('backend.order.showProducts',$order->id)}}" class="btn btn-primary">Chi tiết</a>
+                                        @can('delete',$order)
+                                        <button type="submit" class="btn btn-warning">
+                                            <i class="fa fa-btn fa-trash"></i>Xoá
+                                        </button>
+                                        @endcan
+                                    </form>
+                                </td>
+                            </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                        {!! $orders->links() !!}
                     </div>
                     <!-- /.card-body -->
                 </div>

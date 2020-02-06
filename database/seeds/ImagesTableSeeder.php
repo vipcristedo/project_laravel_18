@@ -14,10 +14,10 @@ class ImagesTableSeeder extends Seeder
         DB::table('images')->truncate();
         for($i=1;$i<=10;$i++){
         DB::table('images')->insert([
-        	'name'=>'product '.$i,
-        	'type'=>'jpg',
+        	'path'=>'/storage/images/'.$i.'.png',
+        	'type'=>'png',
         	'size'=>100+$i,
-            'product_id'=>1
+            'product_id'=>$i
         ]);
     	}
     }

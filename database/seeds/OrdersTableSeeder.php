@@ -12,7 +12,7 @@ class OrdersTableSeeder extends Seeder
     public function run()
     {
     	DB::table('orders')->truncate();
-    	for($i=1;$i<=10;$i++){
+    	for($i=1;$i<=5;$i++){
     	DB::table('orders')->insert([
     		'money'=>$i.'00000',
     		'user_id'=>$i

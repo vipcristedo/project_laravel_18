@@ -40,16 +40,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	@include('frontend.includes.header')
 	@yield('product-breadcrumb')
 <!-- //header -->
+
 <!-- banner -->
 	<div class="banner">
-		@include('frontend.includes.navbar')
-		@yield('banner')
+		@include('frontend.includes.sidebar')
+		<div class="w3l_banner_nav_right">
+			@yield('banner_nav_right')
+			@yield('banner_content')
+		</div>
+		<div class="clearfix"></div>
 	</div>
 <!-- banner -->
-	@yield('banner-bottom')
+
 <!-- top-brands -->
 	@yield('content')
 <!-- //fresh-vegetables -->
+
 <!-- newsletter -->
 	@yield('newsletter')
 <!-- //newsletter -->
@@ -105,7 +111,7 @@ $(document).ready(function(){
 			}
 
 			if (total < 3) {
-				alert('The minimum order quantity is 3. Please add more to your shopping cart before checking out');
+				alert('Số lượng hàng đặt tối thiểu là 3. Hãy thêm sản phẩm trước khi thanh toán');
 				evt.preventDefault();
 			}
 		});

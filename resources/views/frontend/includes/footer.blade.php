@@ -45,7 +45,7 @@
 				<div class="col-md-3 w3_footer_grid agile_footer_grids_w3_footer">
 					<div class="w3_footer_grid_bottom">
 						<h4>100% secure payments</h4>
-						<img src="frontend/images/card.png" alt=" " class="img-responsive" />
+						<img src="{{asset('frontend/images/card.png') }}" alt=" " class="img-responsive" />
 					</div>
 				</div>
 				<div class="col-md-3 w3_footer_grid agile_footer_grids_w3_footer">
@@ -63,7 +63,7 @@
 				<div class="clearfix"> </div>
 			</div>
 			<div class="wthree_footer_copy">
-				<p>© 2016 Grocery Store. All rights reserved | Design by <a href="http://w3layouts.com/">W3layouts</a></p>
+				<p>© 2019 Cristedo Store. All rights reserved</p>
 			</div>
 		</div>
 	</div>

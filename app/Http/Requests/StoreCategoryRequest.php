@@ -13,7 +13,7 @@ class StoreCategoryRequest extends FormRequest
      */
     public function authorize()
     {
-        if(Auth::user()->role==1){
+        if(Auth::user()->role==1||Auth::user()->role==2){
             return true;
         }
         else return false;
@@ -27,7 +27,8 @@ class StoreCategoryRequest extends FormRequest
     public function rules()
     {
         $rules=[
-            'name'=>'required|min:5|max:255'
+            'name'=>'required|min:5|max:255',
+            'slug'=>'unique'
         ];
         return $rules;
     }
@@ -35,13 +36,15 @@ class StoreCategoryRequest extends FormRequest
         $messages=[
             'required' => ':attribute Không được để trống',
             'min' => ':attribute Không được nhỏ hơn :min',
-            'max' => ':attribute Không được lớn hơn :max'
+            'max' => ':attribute Không được lớn hơn :max',
+            'unique' => ':attribute Đã tồn tại'
         ];
         return $messages;
     }
     public function attributes(){
         $attributes=[
-            'name' => 'Tên danh mục'
+            'name' => 'Tên danh mục',
+            'slug' => 'Đường dẫn danh mục'
         ];
         return $attributes;
     }

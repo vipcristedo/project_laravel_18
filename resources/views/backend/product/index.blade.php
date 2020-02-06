@@ -30,22 +30,25 @@ Danh sách sản phẩm
             <div class="container-fluid">
         <!-- Main row -->
         <div class="row">
-
             <div class="col-12">
+                <a href="{{ route('backend.product.create') }}" class="btn btn-primary">Tạo mới</a>
+                @if ( Session::has('msg') )
+                <div class="alert alert-danger">{{ Session::get('msg') }}</div>
+                @endif
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Sản phẩm mới nhập</h3>
-
+                        <h3 class="card-title">Danh sách sản phẩm</h3>
                         <div class="card-tools">
                             <div class="input-group input-group-sm" style="width: 150px;">
                                 <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-
                                 <div class="input-group-append">
                                     <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
                                 </div>
                             </div>
                         </div>
+
                     </div>
+
                     <!-- /.card-header -->
                     <div class="card-body table-responsive p-0">
                         <table class="table table-hover">
@@ -54,7 +57,6 @@ Danh sách sản phẩm
                                 <th>STT</th>
                                 <th>Tên sản phẩm</th>
                                 <th>Số lượng</th>
-                                <th>Mô tả</th>
                                 <th>Act</th>
                             </tr>
                             </thead>
@@ -64,7 +66,6 @@ Danh sách sản phẩm
                                 <td>{{$key+1}}</td>
                                 <td>{{$product->name}}</td>
                                 <td>{{$product->amount}}</td>
-                                <td>{{$product->content}}</td>
                                 <td>
                                     <form action="{{ route('backend.product.delete', $product->id ) }}" method="POST">
                                         {{ csrf_field() }}

@@ -74,6 +74,13 @@ Tạo mới danh mục
                                     </div>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Đường dẫn danh mục</label>
+                                <input type="text" class="form-control" id="" placeholder="Điền tên danh mục " name="slug" value="{{ $category->slug }}">
+                                @error('slug')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
                         </div>
                         <!-- /.card-body -->
 

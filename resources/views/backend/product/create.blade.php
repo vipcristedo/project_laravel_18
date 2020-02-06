@@ -105,6 +105,13 @@ Danh sách sản phẩm
                                 @endif
                             </div>
                             <div class="form-group">
+                                <label>Đường dẫn sản phẩm (Không bắt buộc)</label>
+                                <input type="text" class="form-control" placeholder="Điền đường dẫn sản phẩm" name="slug">
+                                @error('slug')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
                                 <label>Số lượng trong kho</label>
                                 <input type="text" class="form-control" placeholder="Điền số sản phẩm trong kho" name="amount">
                                 @error('amount')
