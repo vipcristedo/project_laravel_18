@@ -32,6 +32,10 @@ Danh sách người dùng
         <div class="row">
 
             <div class="col-12">
+                <a href="{{ route('backend.user.create') }}" class="btn btn-primary">Tạo mới</a>
+                @if ( Session::has('msg') )
+                <div class="alert alert-danger">{{ Session::get('msg') }}</div>
+                @endif
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Danh sách người dùng</h3>
