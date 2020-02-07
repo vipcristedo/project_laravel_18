@@ -13,7 +13,7 @@ class ProductsTableSeeder extends Seeder
     {
         DB::table('products')->truncate();
 
-    	for ($i=1;$i<=32;$i++){
+    	for ($i=1;$i<=20;$i++){
     	DB::table('products')->insert([
         	'name'=>'sp'.$i,
         	'slug'=>'sp-'.$i,

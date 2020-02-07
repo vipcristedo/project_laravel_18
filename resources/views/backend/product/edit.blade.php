@@ -111,6 +111,13 @@ Danh sách sản phẩm
                                 @endif
                             </div>
                             <div class="form-group">
+                                <label for="exampleInputEmail1">Đường dẫn sản phẩm</label>
+                                <input type="text" class="form-control" id="" placeholder="Điền tên sản phẩm " name="slug" value="{{ $product->slug }}">
+                                @error('slug')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
                                 <label>Số lượng trong kho</label>
                                 <input type="text" class="form-control" placeholder="Điền số sản phẩm trong kho" name="amount" value="{{ $product->amount }}">
                                 @error('amount')
@@ -122,7 +129,7 @@ Danh sách sản phẩm
 
                         <div class="card-footer">
                             <a class="btn btn-default" href="{{ route('backend.product.index') }}">Huỷ bỏ</a>
-                            <button type="submit" class="btn btn-sucess">Cập nhật</button>
+                            <button type="submit" class="btn btn-success">Cập nhật</button>
                         </div>
                     </form>
                 </div>

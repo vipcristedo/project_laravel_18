@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreUserAdminRequest extends FormRequest
@@ -28,7 +29,7 @@ class StoreUserAdminRequest extends FormRequest
     {
         $rules=[
             'name'=>'required|min:5|max:50',
-            'email'=>'required|unique',
+            'email'=>'required|unique:users',
             'password'=>'required|confirmed|min:6',
             'address'=>'required|min:5|max:50',
             'phone'=>'required|numeric|min:10',

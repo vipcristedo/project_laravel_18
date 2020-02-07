@@ -103,7 +103,7 @@ Tạo mới người dùng
                         <!-- /.card-body -->
 
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-default">Huỷ bỏ</button>
+                            <a class="btn btn-default" href="{{route('backend.user.index')}}">Huỷ bỏ</a>
                             <button type="submit" class="btn btn-sucess">Tạo mới</button>
                         </div>
                     </form>

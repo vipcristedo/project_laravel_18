@@ -33,7 +33,7 @@ class StoreProductRequest extends FormRequest
             'amount'=>'required|numeric|min:0',
             'content'=>'required|min:10',
             'images'=>'required',
-            'slug'=>'unique'
+            'slug'=>'unique:products'
         ];
         return $rules;
     }

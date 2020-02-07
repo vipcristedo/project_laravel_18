@@ -20,8 +20,20 @@ class UserController extends Controller
     	return view('backend.user.index')->with('users', $users);
     }
 
+    public function show($id){
+        $user = User::findOrFail($id);
+        return view('backend.user.show')->with('user',$user);
+    }
+
     public function create(){
     	return view('backend.user.create');
+    }
+
+    public function edit($id){
+        $user=User::findOrFail($id);
+        return view('backend.user.edit')->with([
+            'user'=>$user
+        ]);
     }
     
     public function showProducts($user_id){
@@ -55,11 +67,6 @@ class UserController extends Controller
         }
     }
     public function store(StoreUserAdminRequest $request){
-        $status = User::where('email',$request->get('email'))->firstOrFail();
-        if ($status != null) {
-            Session::flash('flash_error', 'Email đã tồn tại');
-            return redirect()->route('backend.user.create');
-        }
         $user = new User();
         $user->name = $request->get('name');
         $user->email = $request->get('email');
@@ -69,10 +76,11 @@ class UserController extends Controller
         $user->role = $request->get('role');
         $user->save();
         Session::flash('msg', 'Tạo mới người dùng '.$user->name.' thành công');
+
         return redirect()->route('backend.user.index');
     }
-    public function update(StoreUserAdminRequest $request, $id ){
-
+    public function update(Request $request, $id ){
+        
         $user = User::findOrFail($id);
         $user->role = $request->get('role');
         $user->save();

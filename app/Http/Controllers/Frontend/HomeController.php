@@ -7,23 +7,33 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+    var $categories;
+    function __construct(){
+        $this->categories = Category::all();
+    }
     public function index(){
-        $categories = Category::all();
     	return view('frontend.index')->with([
-            'categories'=>$categories,
-            'categories1'=>$categories
+            'categories'=>$this->categories
         ]);
     }
     public function show(){
-    	return view('frontend.product.show');
+    	return view('frontend.product.show')->with([
+            'categories'=>$this->categories
+        ]);
     }
     public function about(){
-    	return view('frontend.about');
+    	return view('frontend.about')->with([
+            'categories'=>$this->categories
+        ]);
     }
     public function services(){
-    	return view('frontend.services');
+    	return view('frontend.services')->with([
+            'categories'=>$this->categories
+        ]);
     }
     public function checkout(){
-    	return view('frontend.checkout');
+    	return view('frontend.checkout')->with([
+            'categories'=>$this->categories
+        ]);
     }
 }

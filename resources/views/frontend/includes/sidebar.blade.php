@@ -33,7 +33,7 @@
 								<ul>
 								@foreach ($categories as $category_child)
 									@if($category->id==$category_child->parent_id)
-									<li><a href="shop.online.com/category/{{$category_child->id}}">{{$category_child->name}}</a></li>
+									<li><a href="/category/{{$category_child->id}}">{{$category_child->name}}</a></li>
 									@endif
 								@endforeach
 								</ul>

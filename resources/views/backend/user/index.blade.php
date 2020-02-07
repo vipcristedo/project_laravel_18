@@ -58,8 +58,7 @@ Danh sách người dùng
                                 <th>ID</th>
                                 <th>Email</th>
                                 <th>Tên</th>
-                                <th>Thời gian</th>
-                                <th>Status</th>
+                                <th>Quyền</th>
                                 <th>Act</th>
                             </tr>
                             </thead>
@@ -69,12 +68,29 @@ Danh sách người dùng
                                 <td>{{ $user->id }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->name }}</td>
-                                <td>{{ $user->created_at }}</td>
-                                <td><span class="tag tag-success">Approved</span></td>
                                 <td>
-                                    <a href="{{ route('backend.user.show',$user->id)}}" class="btn btn-primary">Chi tiết</a>
+                                @if($user->role==1||$user->role==2)
+                                Admin
+                                @else
+                                User
+                                @endif
+                                </td>
+                                <td>
+                                <form action="{{ route('backend.user.delete', $user->id ) }}" method="POST">
+                                    {{ csrf_field() }}
+                                    {{ method_field('DELETE') }}
                                     <a href="{{ route('backend.user.showProducts',$user->id)}}" class="btn btn-success">Sản phẩm</a>
-                                    <a href="{{ route('backend.user.show',$user->id)}}" class="btn btn-warning">Xóa</a>
+                                    @can('update',$user)
+                                    <a href="{{ route('backend.user.edit',$user->id)}}" class="btn btn-info">Sửa</a>
+                                    @endcan
+                                    <a href="{{ route('backend.user.show',$user->id)}}" class="btn btn-primary">Chi tiết</a>
+                                    
+                                    @can('delete',$user)
+                                    <button type="submit" class="btn btn-warning">
+                                        <i class="fa fa-btn fa-trash"></i>Xoá
+                                    </button>
+                                    @endcan
+                                </form>
                                 </td>
                             </tr>
                             @endforeach

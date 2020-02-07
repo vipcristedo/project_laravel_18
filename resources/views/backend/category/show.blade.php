@@ -1,6 +1,6 @@
 @extends('backend.layouts.master')
 @section('title')
-Danh sách sản phẩm
+Danh sách danh mục
 @endsection
 @section('css')
     
@@ -13,12 +13,13 @@ Danh sách sản phẩm
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0 text-dark">Danh sách sản phẩm</h1>
+                        <h1 class="m-0 text-dark">Danh sách danh mục</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Danh sách sản phẩm</li>
+                            <li class="breadcrumb-item"><a href="{{ route('backend.dashboard') }}">Home</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('backend.category.index') }}">Danh sách danh mụ</a>c</li>
+                            <li class="breadcrumb-item active">Danh mục {{ $category->id }}</li>
                         </ol>
                     </div><!-- /.col -->
                 </div>
@@ -34,7 +35,7 @@ Danh sách sản phẩm
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Sản phẩm {{ $product->name }}</h3>
+                        <h3 class="card-title">Danh mục {{ $category->id }}</h3>
 
                         <div class="card-tools">
                             <div class="input-group input-group-sm" style="width: 150px;">
@@ -51,18 +52,18 @@ Danh sách sản phẩm
                         <table class="table table-hover">
                             <tbody>
                             <tr>
-                                <td>Tên sản phẩm</td>
-                                <td>{{$product->name}}
+                                <td>Tên danh mục</td>
+                                <td>{{$category->name}}
                                 </td>
                             </tr>
                             <tr>
-                                <td>Nội dung</td>
-                                <td>{!!$product->content!!}
+                                <td>Danh mục cha</td>
+                                <td>{!!$category->parent_id!!}
                                 </td>
                             </tr>
                             <tr>
-                                <td>Đường dẫn sản phẩm</td>
-                                <td>{{$product->slug}}
+                                <td>Đường dẫn danh mục</td>
+                                <td>{{$category->slug}}
                                 </td>
                             </tr>
                             </tbody>

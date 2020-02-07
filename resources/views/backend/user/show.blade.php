@@ -1,6 +1,6 @@
 @extends('backend.layouts.master')
 @section('title')
-Danh sách sản phẩm
+người dùng
 @endsection
 @section('css')
     
@@ -13,12 +13,12 @@ Danh sách sản phẩm
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0 text-dark">Danh sách sản phẩm</h1>
+                        <h1 class="m-0 text-dark">người dùng {{ $user->name }}</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Danh sách sản phẩm</li>
+                            <li class="breadcrumb-item"><a href="{{ route('backend.dashboard') }}">Home</a></li>
+                            <li class="breadcrumb-item active">người dùng</li>
                         </ol>
                     </div><!-- /.col -->
                 </div>
@@ -34,7 +34,7 @@ Danh sách sản phẩm
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Sản phẩm {{ $product->name }}</h3>
+                        <h3 class="card-title">Sản phẩm {{ $user->name }}</h3>
 
                         <div class="card-tools">
                             <div class="input-group input-group-sm" style="width: 150px;">
@@ -51,18 +51,18 @@ Danh sách sản phẩm
                         <table class="table table-hover">
                             <tbody>
                             <tr>
-                                <td>Tên sản phẩm</td>
-                                <td>{{$product->name}}
+                                <td>Họ Tên</td>
+                                <td>{{$user->name}}
                                 </td>
                             </tr>
                             <tr>
-                                <td>Nội dung</td>
-                                <td>{!!$product->content!!}
+                                <td>Email</td>
+                                <td>{!!$user->email!!}
                                 </td>
                             </tr>
                             <tr>
-                                <td>Đường dẫn sản phẩm</td>
-                                <td>{{$product->slug}}
+                                <td>Địa chỉ</td>
+                                <td>{{$user->address}}
                                 </td>
                             </tr>
                             </tbody>

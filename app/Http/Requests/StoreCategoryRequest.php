@@ -28,7 +28,7 @@ class StoreCategoryRequest extends FormRequest
     {
         $rules=[
             'name'=>'required|min:5|max:255',
-            'slug'=>'unique'
+            'slug'=>'unique:categories'
         ];
         return $rules;
     }

@@ -56,10 +56,15 @@ Route::group([
 		Route::get('/create','UserController@create')->name('backend.user.create');
 
 		Route::post('/','UserController@store')->name('backend.user.store');
+
+		Route::get('/edit/{id}','UserController@edit')->name('backend.user.edit');
+		Route::match(['put','patch'],'/{id}','UserController@update')->name('backend.user.update');
 		
 		Route::get('/{id}','UserController@show')->name('backend.user.show');
 
 		Route::get('products/{id}','UserController@showProducts')->name('backend.user.showProducts');
+
+		Route::delete('/{id}','UserController@destroy')->name('backend.user.delete');
 
 		Route::get('/test/{id}','UserController@test')->name('backend.user.test');
 	});
@@ -70,7 +75,7 @@ Route::group([
 	],function(){
 		Route::get('/index','ProductController@index')->name('backend.product.index');
 		Route::get('/create','ProductController@create')->name('backend.product.create');
-		Route::post('','ProductController@store')->name('backend.product.store');
+		Route::post('/','ProductController@store')->name('backend.product.store');
 		Route::get('/edit/{product}','ProductController@edit')->name('backend.product.edit');
 
 		// Route::get('/edit/{product}','ProductController@edit')->name('backend.product.edit')->middleware('can:update,product');
@@ -90,6 +95,7 @@ Route::group([
 		'namespace'=>'Category'
 	],function(){
 		Route::get('/index','CategoryController@index')->name('backend.category.index');
+		Route::get('/{id}','CategoryController@show')->name('backend.category.show');
 		Route::get('/create','CategoryController@create')->name('backend.category.create');
 		Route::post('/','CategoryController@store')->name('backend.category.store');
 

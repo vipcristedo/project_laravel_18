@@ -4,13 +4,20 @@ namespace App\Http\Controllers\Backend\Category;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCategoryRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use App\Category;
+use App\Product;
 class CategoryController extends Controller
 {
     public function index(){
     	$categories= Category::orderByRaw('created_at DESC')->paginate(8);
     	return view('backend.category.index')->with('categories', $categories);
+    }
+
+    public function show($id){
+        $category = Category::findOrFail($id);
+        return view('backend.category.show')->with('category',$category);
     }
 
     public function create(){

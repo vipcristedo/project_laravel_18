@@ -12,7 +12,7 @@ class ImagesTableSeeder extends Seeder
     public function run()
     {
         DB::table('images')->truncate();
-        for($i=1;$i<=10;$i++){
+        for($i=1;$i<=20;$i++){
         DB::table('images')->insert([
         	'path'=>'/storage/images/'.$i.'.png',
         	'type'=>'png',

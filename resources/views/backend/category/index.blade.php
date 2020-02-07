@@ -75,6 +75,7 @@ Danh sách hạng mục
                                         {{ method_field('DELETE') }}
                                         <a href="{{ route('backend.category.edit',$category->id)}}" class="btn btn-info">Sửa</a>
                                         <a href="{{ route('backend.category.showProducts',$category->id)}}" class="btn btn-success">Sản phẩm</a>
+                                        <a href="{{ route('backend.category.show',$category->id)}}" class="btn btn-primary">Chi tiết</a>
                                         <button type="submit" class="btn btn-warning">
                                             <i class="fa fa-btn fa-trash"></i>Xoá
                                         </button>
