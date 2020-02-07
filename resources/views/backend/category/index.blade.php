@@ -53,7 +53,7 @@ Danh sách hạng mục
                         <table class="table table-hover">
                             <thead>
                             <tr>
-                                <th>STT</th>
+                                <th>STT </th>
                                 <th>ID</th>
                                 <th>Tên danh mục</th>
                                 <th>Thời gian tạo</th>
