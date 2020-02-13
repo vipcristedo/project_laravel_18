@@ -5,13 +5,16 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCategoryRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 use App\Category;
 use App\Product;
 class CategoryController extends Controller
 {
     public function index(){
-    	$categories= Category::orderByRaw('created_at DESC')->paginate(8);
+    	$categories= Cache::remember('categories', 50 ,function(){
+            return Category::orderByRaw('created_at DESC')->paginate(8);
+        });
     	return view('backend.category.index')->with('categories', $categories);
     }
 
@@ -61,6 +64,7 @@ class CategoryController extends Controller
 
     public function destroy($id){
     	$category = Category::findOrFail($id);
+        Session::flash('msg', 'Xóa danh mục '.$category->name.' thành công');
     	$category->delete();
         return redirect()->route('backend.category.index');
     }

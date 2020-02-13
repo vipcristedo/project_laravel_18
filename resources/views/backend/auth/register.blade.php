@@ -3,7 +3,7 @@
 Đăng ký
 @endsection
 @section('login-box-msg')
-Sign in to start your session
+Sign up
 @endsection
 @section('content')
 <form method="POST" action="{{ route('register') }}">
@@ -89,15 +89,6 @@ Sign in to start your session
     </div>
 
     <div class="row">
-      <div class="col-8">
-        <div class="icheck-primary">
-          <input type="checkbox" id="agreeTerms" name="terms" value="agree">
-          <label for="agreeTerms">
-           I agree to the <a href="#">terms</a>
-          </label>
-        </div>
-      </div>
-      <!-- /.col -->
       <div class="col-4">
         <button type="submit" class="btn btn-primary">{{ __('Register') }}</button>
       </div>
@@ -107,9 +98,6 @@ Sign in to start your session
 @endsection
 @section('or')
 <p class="mb-1">
-    <a href="#">I forgot my password</a>
-</p>
-<p class="mb-0">
-    <a href="{{ route('register') }}" class="text-center">Register a new membership</a>
+    <a href="{{ route('login') }}">I've already had an account! Login?</a>
 </p>
 @endsection

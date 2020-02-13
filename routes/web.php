@@ -21,7 +21,7 @@ Route::group([
 	Route::get('/','HomeController@index')->name('index');
 	Route::get('/about','HomeController@about')->name('about');
 	Route::post('/checkout','HomeController@checkout')->name('checkout');
-	Route::get('/show','HomeController@index')->name('show');
+	Route::get('/show','HomeController@show')->name('show');
 	Route::get('/services','HomeController@services')->name('services');
 
 	Route::group([

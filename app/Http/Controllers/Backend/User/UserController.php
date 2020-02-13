@@ -89,7 +89,8 @@ class UserController extends Controller
         return redirect()->route('backend.user.index');
     }
     public function destroy($id){
-        $user = Category::findOrFail($id);
+        $user = User::findOrFail($id);
+        Session::flash('msg', 'Xóa người dùng '.$user->name.' thành công');
         $user->delete();
         return redirect()->route('backend.user.index');
     }

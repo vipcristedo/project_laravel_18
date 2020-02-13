@@ -37,7 +37,7 @@ Sản phẩm
 					</div>
 					<div class="snipcart-item block">
 						<div class="snipcart-thumb agileinfo_single_right_snipcart">
-							<h4>{{ $product->sale_price }}VNĐ <span>{{ $product->origin_price }}VNĐ</span></h4>
+							<h4>{{ number_format($product->sale_price) }}VNĐ <span>{{ number_format($product->origin_price) }}VNĐ</span></h4>
 						</div>
 						<div class="snipcart-details agileinfo_single_right_details">
 							<form action="#" method="post">

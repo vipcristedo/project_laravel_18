@@ -86,7 +86,7 @@ Tạo mới danh mục
 
                         <div class="card-footer">
                             <a class="btn btn-default" href="{{ route('backend.category.index') }}">Huỷ bỏ</a>
-                            <button type="submit" class="btn btn-sucess">Cập nhật</button>
+                            <button type="submit" class="btn btn-success">Cập nhật</button>
                         </div>
                     </form>
                 </div>

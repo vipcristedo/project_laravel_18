@@ -12,12 +12,12 @@
 			   <!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
 					<ul class="nav navbar-nav nav_1">
-						@foreach ($categories as $category)
+						@foreach ($menu as $category)
 						@php 
 						$flag = false; 
 						@endphp
 						@if($category->parent_id==null)
-						@foreach ($categories as $category_child)
+						@foreach ($menu as $category_child)
 							@if($category->id==$category_child->parent_id)
 							@php
 								$flag = true;
@@ -31,7 +31,7 @@
 						<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu">
 							<div class="w3ls_vegetables">
 								<ul>
-								@foreach ($categories as $category_child)
+								@foreach ($menu as $category_child)
 									@if($category->id==$category_child->parent_id)
 									<li><a href="/category/{{$category_child->id}}">{{$category_child->name}}</a></li>
 									@endif

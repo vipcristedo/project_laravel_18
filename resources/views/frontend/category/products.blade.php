@@ -17,7 +17,7 @@ Sản phẩm
 								<div class="snipcart-thumb">
 									<a href="{{ route('frontend.product.show',$product->id) }}"><img src="{{ $images[$product->id]->path }}" alt=" " class="img-responsive" /></a>
 									<p>{{ $product->name }}</p>
-									<h4>{{ $product->sale_price }}VNĐ <span>{{ $product->origin_price }}VNĐ</span></h4>
+									<h4>{{ number_format($product->sale_price) }}VNĐ <span>{{ number_format($product->origin_price) }}VNĐ</span></h4>
 								</div>
 								<div class="snipcart-details">
 									<form action="#" method="post">

@@ -3,7 +3,7 @@
 Đăng nhập
 @endsection
 @section('login-box-msg')
-Sign in to start your session
+Sign in
 @endsection
 @section('content')
 <form action="{{ route('login') }}" method="post">

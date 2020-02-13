@@ -154,7 +154,9 @@ class ProductController extends Controller
     }
     public function destroy($id){
         $product= Product::findOrFail($id);
+        Session::flash('msg', 'Xóa Sản phẩm '.$product->name.' thành công');
         $product->delete();
+
         return redirect()->route('backend.product.index');
     }
 
