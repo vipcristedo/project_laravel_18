@@ -40,7 +40,7 @@ Danh sách sản phẩm
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form role="form" action="{{ route('backend.product.update',$product->id) }}" method="POST">
+                    <form role="form" action="{{ route('backend.product.update',$product->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         {{ method_field('PUT') }}
                         <div class="card-body">
@@ -91,7 +91,7 @@ Danh sách sản phẩm
                                 <label for="exampleInputFile">Hình ảnh sản phẩm</label>
                                 <div class="input-group">
                                     @foreach($images as $key => $image)
-                                    <img src="/storage/images/{{ $image->name }}" style="max-width: 100px">
+                                    <img src="{{ $image->path }}" style="max-width: 100px">
                                     @endforeach
                                 </div>
                                 <div class="input-group">

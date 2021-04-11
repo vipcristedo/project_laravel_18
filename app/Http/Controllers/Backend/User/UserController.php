@@ -35,6 +35,12 @@ class UserController extends Controller
             'user'=>$user
         ]);
     }
+    public function edit1(){
+        $user=User::findOrFail(\Auth::user()->id);
+        return view('backend.user.edit1')->with([
+            'user'=>$user
+        ]);
+    }
     
     public function showProducts($user_id){
         $products=\App\User::findOrFail($user_id)->products;
@@ -82,7 +88,12 @@ class UserController extends Controller
     public function update(Request $request, $id ){
         
         $user = User::findOrFail($id);
-        $user->role = $request->get('role');
+        $user->role = $request->get('role')==null?\Auth::user()->role:$request->get('role');
+        $user->name = $request->get('name');
+        $user->email = $request->get('email');
+        $user->phone = $request->get('phone');
+        $user->address = $request->get('address');
+        $user->password = $request->get('password')==null?$user->password:bcrypt($request->get('password'));
         $user->save();
         Session::flash('msg', 'Cập nhật người dùng '.$user->name.' thành công');
 

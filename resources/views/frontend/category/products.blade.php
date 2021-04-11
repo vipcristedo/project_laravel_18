@@ -1,7 +1,13 @@
 @extends('frontend.layouts.master')
 @section('title')
-Sản phẩm
+{{ $category->name }}
 @endsection
+
+@section('banner_nav_right')
+<div class="w3l_banner_nav_right_banner" style="background: url({{ asset($banner) }}) no-repeat 0px 0px; margin: 0;">
+</div>
+@endsection
+
 @section('banner_content')
 	<div class="w3ls_w3l_banner_nav_right_grid w3ls_w3l_banner_nav_right_grid_sub">
 		<h3>{{ $category->name }}</h3>
@@ -10,30 +16,16 @@ Sản phẩm
 			<div class="col-md-3 w3ls_w3l_banner_left">
 				<div class="hover14 column">
 				<div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
-					
 					<div class="agile_top_brand_left_grid1">
 						<figure>
 							<div class="snipcart-item block">
 								<div class="snipcart-thumb">
-									<a href="{{ route('frontend.product.show',$product->id) }}"><img src="{{ $images[$product->id]->path }}" alt=" " class="img-responsive" /></a>
+									<a href="{{ route('frontend.product.show',$product->id) }}"><img src="{{ $images[$product->id]->path }}" alt=" " class="img-responsive" style="max-height: 140px; max-width: 140px;" /></a>
 									<p>{{ $product->name }}</p>
-									<h4>{{ number_format($product->sale_price) }}VNĐ <span>{{ number_format($product->origin_price) }}VNĐ</span></h4>
+									<h4>{{ number_format($product->sale_price) }}VNĐ <span>{{ number_format($product->origin_price) }}</span></h4>
 								</div>
 								<div class="snipcart-details">
-									<form action="#" method="post">
-										<fieldset>
-											<input type="hidden" name="cmd" value="_cart" />
-											<input type="hidden" name="add" value="1" />
-											<input type="hidden" name="business" value=" " />
-											<input type="hidden" name="item_name" value="{{ $product->name }}" />
-											<input type="hidden" name="amount" value="{{ $product->sale_price }}" />
-											<input type="hidden" name="discount_amount" value="{{ $product->origin_price-$product->sale_price }}" />
-											<input type="hidden" name="currency_code" value="VND" />
-											<input type="hidden" name="return" value=" " />
-											<input type="hidden" name="cancel_return" value=" " />
-											<input type="submit" name="submit" value="Add to cart" class="button" />
-										</fieldset>
-									</form>
+									<a href="{{ route('frontend.cart.add',$product->id) }}" class="btn btn-danger">Thêm Vào Giỏ</a>
 								</div>
 							</div>
 						</figure>

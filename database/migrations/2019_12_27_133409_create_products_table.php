@@ -26,7 +26,7 @@ class CreateProductsTable extends Migration
             $table->integer('amount')->default('0');
             $table->integer('rate')->default('5');
             $table->integer('rate_count')->default('1');
-
+            $table->integer('sold')->default('0');
             $table->timestamps();
             $table->softDeletes();
         });

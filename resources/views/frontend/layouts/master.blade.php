@@ -10,6 +10,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 		function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- //for-mobile-apps -->
+<link rel="icon" href="https://www.southeastpsych.com/wp-content/uploads/2015/05/s-no-background-1200x1200.png">
 <link href="{{ asset('frontend/css/bootstrap.css') }}" rel="stylesheet" type="text/css" media="all" />
 <link href="{{ asset('frontend/css/style.css') }}" rel="stylesheet" type="text/css" media="all" />
 <!-- font-awesome icons -->
@@ -97,26 +98,32 @@ $(document).ready(function(){
 <!-- //here ends scrolling icon -->
 <script src="{{ asset('frontend/js/minicart.js') }}"></script>
 <script>
-		paypal.minicart.render();
+	paypal.minicart.render();
 
-		paypal.minicart.cart.on('checkout', function (evt) {
-			var items = this.items(),
-				len = items.length,
-				total = 0,
-				i;
+	paypal.minicart.cart.on('checkout', function (evt) {
+		var items = this.items(),
+			len = items.length,
+			total = 0,
+			i;
 
-			// Count the number of each item in the cart
-			for (i = 0; i < len; i++) {
-				total += items[i].get('quantity');
-			}
+		// Count the number of each item in the cart
+		for (i = 0; i < len; i++) {
+			total += items[i].get('quantity');
+		}
 
-			if (total < 3) {
-				alert('Số lượng hàng đặt tối thiểu là 3. Hãy thêm sản phẩm trước khi thanh toán');
-				evt.preventDefault();
-			}
-		});
+		if (total < 3) {
+			alert('Số lượng hàng đặt tối thiểu là 3. Hãy thêm sản phẩm trước khi thanh toán');
+			evt.preventDefault();
+		}
+	});
 
-	</script>
+</script>
+<script>
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();   
+});
+</script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	@yield('js')
 </body>
 </html>

@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\View;
 use App\Category;
+use App\Order;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -29,6 +30,10 @@ class AppServiceProvider extends ServiceProvider
         $categories = Cache::remember('categories', now()->addHour(24) ,function(){
             return Category::orderByRaw('name ASC')->get();
         });
-        View::share('menu',$categories);
+        $newOrders = Order::where('status', 0)->count();
+        View::share([
+            'menu'=>$categories,
+            'newOrders'=>$newOrders
+        ]);
     }
 }

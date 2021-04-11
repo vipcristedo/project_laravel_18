@@ -30,43 +30,30 @@ Danh sách hạng mục
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                <a href="{{ route('backend.category.create') }}" class="btn btn-primary">Tạo mới</a>
                 @if ( Session::has('msg') )
                 <div class="alert alert-danger">{{ Session::get('msg') }}</div>
                 @endif
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Danh mục</h3>
-
-                        <div class="card-tools">
-                            <div class="input-group input-group-sm" style="width: 150px;">
-                                <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-
-                                <div class="input-group-append">
-                                    <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
-                                </div>
-                            </div>
-                        </div>
+                        <a href="{{ route('backend.category.create') }}" class="btn btn-primary">Tạo mới</a>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body table-responsive p-0">
                         <table class="table table-hover">
                             <thead>
                             <tr>
-                                <th>STT </th>
                                 <th>ID</th>
                                 <th>Tên danh mục</th>
                                 <th>Thời gian tạo</th>
-                                <th>Parent ID</th>
+                                <th>Danh mục cha</th>
                                 <th>Act</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($categories as $key => $category)
+                            @foreach($categories as $category)
                             <tr>
-                                <td>{{$key+1}}</td>
                                 <td>{{$category->id}}</td>
-                                <td>{{$category->name}}</td>
+                                <td><a href="{{ route('backend.category.show',$category->id)}}">{{$category->name}}</a></td>
                                 <td>{{$category->created_at}}</td>
                                 <td>{{$category->parent_id}}</td>
                                 <td>
@@ -75,7 +62,7 @@ Danh sách hạng mục
                                         {{ method_field('DELETE') }}
                                         <a href="{{ route('backend.category.edit',$category->id)}}" class="btn btn-info">Sửa</a>
                                         <a href="{{ route('backend.category.showProducts',$category->id)}}" class="btn btn-success">Sản phẩm</a>
-                                        <a href="{{ route('backend.category.show',$category->id)}}" class="btn btn-primary">Chi tiết</a>
+                                        
                                         <button type="submit" class="btn btn-warning">
                                             <i class="fa fa-btn fa-trash"></i>Xoá
                                         </button>

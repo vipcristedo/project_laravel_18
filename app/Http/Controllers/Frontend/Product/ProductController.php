@@ -8,23 +8,33 @@ use App\Product;
 use App\Category;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Session;
 use App\Http\Requests\StoreProductRequest;
 
 class ProductController extends Controller
 {
-    var $categories;
-    function __construct(){
-        $this->categories=Category::all();
-    }
-
     public function show($id){
     	$product = Product::findOrFail($id);
         $image= Product::findOrFail($id)->images()->first();
+        $products = Product::where('category_id', $product->category_id)->take(12)->get();
+        $images = array();
+        $productsSearched = array();
+        foreach ($products as $value) {
+            $images[$value->id]=$value->images()->first();
+        }
     	return view('frontend.product.show')->with([
             'product'=>$product,
-            'categories'=>$this->categories,
-            'image'=>$image
+            'products'=>$products,
+            'productsSearched'=>$productsSearched,
+            'image'=>$image,
+            'images'=>$images
         ]);
     }
     
+    public function search($search){
+        
+        $productsSearched = Product::where('name','like','%'.$search.'%')->get();
+        Session::flash('result',$productsSearched);
+        return redirect()->back();
+    }
 }

@@ -91,6 +91,42 @@ class ProductController extends Controller
         }
     }
 
+
+    public function update(Request $request,$id){
+        $product=Product::findOrFail($id);
+        
+        $product->name=$request->get('name');
+        $product->slug = $request->get('slug')==null?\Illuminate\Support\Str::slug($request->get('name').time()):$request->get('slug');
+        $product->category_id = $request->get('category_id');
+        $product->origin_price = $request->get('origin_price');
+        $product->sale_price = $request->get('sale_price');
+        $product->amount = $request->get('amount');
+        $product->user_id = Auth::user()->id;
+        $product->content = $request->get('content');
+        $product->save();
+        if ($request->hasFile('images')) {
+            $images=Image::where('product_id',$product->id)->get();
+            foreach ($images as $image) {
+                Storage::delete($image->path);
+                $image->delete();
+            }
+            $images1=$request->file('images');
+            foreach ($images1 as $image){
+                $image1 = new Image();
+                $image1->path = '/storage/images/'.time().$image->getClientOriginalName();
+                $image1->product_id = $product->id;
+                $image1->type = $image->getClientOriginalExtension();
+                $image1->size = $image->getClientSize();
+                $image->storeAs('public/images',time().$image->getClientOriginalName());
+                $image1->save();
+            }
+        }
+        
+        Session::flash('msg', 'Cập nhật Sản phẩm '.$product->name.' thành công');
+
+        return redirect()->route('backend.product.index');
+    }
+
     public function edit(Product $product){
         
         // if ($user->can('update', $product)) {
@@ -110,7 +146,7 @@ class ProductController extends Controller
         // }
 
         // $product=Product::findOrFail($id);
-        $images=\App\Product::findOrFail($product->id)->images();
+        $images=\App\Product::findOrFail($product->id)->images()->get();
         $categories=\App\Category::orderByRaw('name ASC')->get();
         $user = Auth::user();
         return view('backend.product.edit')->with([
@@ -120,22 +156,6 @@ class ProductController extends Controller
         ]);
     }
 
-    public function update(StoreProductRequest $request,$id){
-        $product=Product::findOrFail($id);
-        
-        $product->name=$request->get('name');
-        $product->slug = $request->get('slug')==null?\Illuminate\Support\Str::slug($request->get('name').time()):$request->get('slug');
-        $product->category_id = $request->get('category_id');
-        $product->origin_price = $request->get('origin_price');
-        $product->sale_price = $request->get('sale_price');
-        $product->amount = $request->get('amount');
-        $product->user_id = Auth::user()->id;
-        $product->content = $request->get('content');
-        $product->save();
-        Session::flash('msg', 'Cập nhật Sản phẩm '.$product->name.' thành công');
-
-        return redirect()->route('backend.product.index');
-    }
 
     public function show($id){
     	$product = Product::findOrFail($id);

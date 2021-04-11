@@ -6,6 +6,7 @@
     <title>@yield('title')</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="https://www.southeastpsych.com/wp-content/uploads/2015/05/s-no-background-1200x1200.png">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="/backend/plugins/fontawesome-free/css/all.min.css">
     <!-- Ionicons -->
@@ -90,6 +91,11 @@
 <script src="/backend/dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="/backend/dist/js/demo.js"></script>
+<script>
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();   
+});
+</script>
 @yield('js')
 </body>
 </html>

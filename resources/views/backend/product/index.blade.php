@@ -31,22 +31,26 @@ Danh sách sản phẩm
         <!-- Main row -->
         <div class="row">
             <div class="col-12">
-                <a href="{{ route('backend.product.create') }}" class="btn btn-primary">Tạo mới</a>
                 @if ( Session::has('msg') )
                 <div class="alert alert-danger">{{ Session::get('msg') }}</div>
                 @endif
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Danh sách sản phẩm</h3>
-                        <div class="card-tools">
-                            <div class="input-group input-group-sm" style="width: 150px;">
-                                <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-                                <div class="input-group-append">
-                                    <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
-                                </div>
-                            </div>
-                        </div>
-
+                        <a href="{{ route('backend.product.create') }}" class="btn btn-primary">Tạo mới</a> 
+                        {{-- <form action="GET" style="float: right">
+                            <select name = "day_created">
+                                <option value="true">cũ nhất</option>
+                                <option value="fail">mới nhất</option>
+                            </select>
+                            <select name = "hot">
+                                <option value="true">bán chạy nhất</option>
+                                <option value="fail">bán ít nhất</option>
+                            </select>
+                            <select name = "storage">
+                                <option value="true">còn trong kho nhiều nhất</option>
+                                <option value="fail">cháy hàng</option>
+                            </select>
+                        </form> --}}
                     </div>
 
                     <!-- /.card-header -->
@@ -54,18 +58,23 @@ Danh sách sản phẩm
                         <table class="table table-hover">
                             <thead>
                             <tr>
-                                <th>STT</th>
+                                <th>ID</th>
                                 <th>Tên sản phẩm</th>
-                                <th>Số lượng</th>
+                                <th>SL trong kho</th>
+                                <th>Đã bán</th>    
+                                <th>Danh mục</th>    
                                 <th>Act</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($products as $key => $product)
+                            @foreach($products as $product)
                             <tr>
-                                <td>{{$key+1}}</td>
-                                <td>{{$product->name}}</td>
+                                <td>{{$product->id}}</td>
+                                <td><a href="{{ route('backend.product.show',$product->id) }}">{{$product->name}}</a></td>
                                 <td>{{$product->amount}}</td>
+                                <td>{{ $product->sold }}</td>
+                                <td><a href="{{ route('backend.category.show',$product->category_id) }}">{{\DB::table('categories')->where('id',$product->category_id)->value('name')}}</a></td>
+
                                 <td>
                                     <form action="{{ route('backend.product.delete', $product->id ) }}" method="POST">
                                         {{ csrf_field() }}
@@ -73,7 +82,6 @@ Danh sách sản phẩm
                                         @can('update',$product)
                                         <a href="{{ route('backend.product.edit',$product->id)}}" class="btn btn-info">Sửa</a>
                                         @endcan
-                                        <a href="{{ route('backend.product.show',$product->id)}}" class="btn btn-primary">Chi tiết</a>
                                         <a href="{{ route('backend.product.showImages',$product->id)}}" class="btn btn-success">Ảnh</a>
                                         @can('delete',$product)
                                         <button type="submit" class="btn btn-warning">

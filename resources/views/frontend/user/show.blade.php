@@ -52,17 +52,17 @@ Check Out
 			</div>
 			<div class="checkout-left">	
 				<div class="col-md-4 checkout-left-basket">
-					<h4>hóa đơn</h4>
+					<h4>Continue to basket</h4>
 					<ul>
 						@foreach($cart as $cartItem)
-						<li>{{ $cartItem->name }} x{{ $cartItem->qty }} <span>{{ number_format($cartItem->price*$cartItem->qty)}}VNĐ </span></li>
+						<li>{{ $cartItem->name }} <i>-</i>{{ $cartItem->qty }} <span>{{ number_format($cartItem->price*$cartItem->qty)}}VNĐ </span></li>
 						@endforeach
-						<li>Total <i>-</i> <span>{{ number_format(\Cart::total()) }}VNĐ</span></li>
+						<li>Total <i>-</i> <span>{{ \Cart::total() }}VNĐ</span></li>
 					</ul>
 				</div>
 				<div class="col-md-8 address_form_agile">
 					<div class="checkout-right-basket">
-				        	<a href="{{ route('frontend.cart.confirm') }}">Xác nhận<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
+				        	<a href="payment.html">Xác nhận<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
 			      	</div>
 				</div>
 				<div class="clearfix"> </div>
@@ -70,6 +70,7 @@ Check Out
 		</div>
 <!-- //about -->
 @endsection
+
 @section('content')
 @endsection
 
@@ -90,30 +91,10 @@ Check Out
 		</div>
 	</div>
 	@endif
-	<html>
-       <head>
-          <title>The jQuery Example</title>
-          <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-          <script type="text/javascript" language="javascript">
-             $(document).ready(function() {
-                $("#driver").click(function(event){
-                   $('#stage').load('{{ route('frontend.cart.add',1) }}');
-                });
-             });
-          </script>
-       </head>
-       <body>
-          <div id="stage">
-             STAGE {{ \Cart::total() }}
-          </div>
-          <input type="button" id="driver" value="Load Data" />
-       </body>
-    </html>
 @endsection
 
 @section('js')
 <!-- js -->
 <script src="js/jquery-1.11.1.min.js"></script>
- <!--quantity-->
 <!-- //js -->
 @endsection

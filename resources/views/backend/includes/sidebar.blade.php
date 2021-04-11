@@ -1,7 +1,7 @@
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
         <a href="{{ route('index') }}" class="brand-link">
-            <img src="/backend/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQArmLLZtEOtoRum2BJ2xo__V-dbRO_jkn8E6I9i68Uqb-QAQM-" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
                  style="opacity: .8">
             <span class="brand-text font-weight-light">Shop Online</span>
         </a>
@@ -12,9 +12,10 @@
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
                     <img src="/backend/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                    <link rel="icon" href="https://www.southeastpsych.com/wp-content/uploads/2015/05/s-no-background-1200x1200.png">
                 </div>
                 <div class="info">
-                    <a href="#" class="d-block">{{ Auth::user()->name }}</a>
+                    <a href="{{ route('backend.user.edit1') }}" class="d-block">{{ Auth::user()->name }}</a>
                 </div>
             </div>
 
@@ -113,7 +114,13 @@
                             <li class="nav-item">
                                 <a href="{{ route('backend.order.index') }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Danh sách</p>
+                                    <p>Tất cả đơn</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('backend.order.newOrders') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Đơn chưa xác nhận</p>
                                 </a>
                             </li>
                         </ul>

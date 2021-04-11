@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Category;
+use App\Product;
+use App\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 
@@ -27,8 +29,17 @@ class HomeController extends Controller
         // $value =Cache::put('key',$category,now()->addHour(24));
         // dd($value);
         
-
-    	return view('frontend.index');
+        $products = Product::all()->take(12)->sortBy('name');
+        $images = array();
+        $productsSearched = array();
+        foreach ($products as $product) {
+            $images[$product->id]=$product->images()->first();
+        }
+    	return view('frontend.index')->with([
+            'products'=>$products,
+            'productsSearched'=>$productsSearched,
+            'images'=>$images
+        ]);
     }
     public function show(){
         // if(Cache::has('key')){
@@ -48,10 +59,15 @@ class HomeController extends Controller
     public function about(){
     	return view('frontend.about');
     }
-    public function services(){
-    	return view('frontend.services');
-    }
     public function checkout(){
-    	return view('frontend.checkout');
+        $cart = \Cart::content();
+        $images = array();
+        foreach ($cart as $cartItem) {
+            $images[$cartItem->id]=Product::find($cartItem->id)->images()->first();
+        }
+    	return view('frontend.checkout')->with([
+            'cart'=>$cart,
+            'images'=>$images
+        ]);
     }
 }

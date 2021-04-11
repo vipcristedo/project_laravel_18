@@ -25,7 +25,6 @@ class HomeController extends Controller
     {
         return view('frontend.index');
     }
-
     public function test(){
         // $flag = Storage::move('old2/test1.txt', 'new/test1.txt');
         // dd($flag);
@@ -33,7 +32,11 @@ class HomeController extends Controller
         // dd($url);
         // $files = Storage::files();
         // dd($files);
-        Storage::disk('public')->makeDirectory('images');
-        dd(1);
+        // Storage::disk('public')->makeDirectory('images');
+
+        return view('frontend.test');
+    }
+    public function getTest(Request $request){
+        dd($request->get('roles'));
     }
 }

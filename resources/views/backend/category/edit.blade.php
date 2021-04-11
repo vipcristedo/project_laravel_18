@@ -73,6 +73,9 @@ Tạo mới danh mục
                                         <span class="input-group-text" id="">Upload</span>
                                     </div>
                                 </div>
+                                @if ( Session::has('images') )
+                                <div class="alert alert-danger">{{ Session::get('images') }}</div>
+                                @endif
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Đường dẫn danh mục</label>

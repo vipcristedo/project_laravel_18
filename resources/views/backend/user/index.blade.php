@@ -30,25 +30,13 @@ Danh sách người dùng
             <div class="container-fluid">
         <!-- Main row -->
         <div class="row">
-
             <div class="col-12">
-                <a href="{{ route('backend.user.create') }}" class="btn btn-primary">Tạo mới</a>
                 @if ( Session::has('msg') )
                 <div class="alert alert-danger">{{ Session::get('msg') }}</div>
                 @endif
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Danh sách người dùng</h3>
-
-                        <div class="card-tools">
-                            <div class="input-group input-group-sm" style="width: 150px;">
-                                <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-
-                                <div class="input-group-append">
-                                    <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
-                                </div>
-                            </div>
-                        </div>
+                        <a href="{{ route('backend.user.create') }}" class="btn btn-primary">Tạo mới</a>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body table-responsive p-0">
@@ -64,10 +52,11 @@ Danh sách người dùng
                             </thead>
                             <tbody>
                             @foreach($users as $user)
+                            @if($user->id != Auth::user()->id)
                             <tr>
                                 <td>{{ $user->id }}</td>
                                 <td>{{ $user->email }}</td>
-                                <td>{{ $user->name }}</td>
+                                <td><a href="{{ route('backend.user.show',$user->id) }}">{{ $user->name }}</a></td>
                                 <td>
                                 @if($user->role==1||$user->role==2)
                                 Admin
@@ -83,8 +72,6 @@ Danh sách người dùng
                                     @can('update',$user)
                                     <a href="{{ route('backend.user.edit',$user->id)}}" class="btn btn-info">Sửa</a>
                                     @endcan
-                                    <a href="{{ route('backend.user.show',$user->id)}}" class="btn btn-primary">Chi tiết</a>
-                                    
                                     @can('delete',$user)
                                     <button type="submit" class="btn btn-warning">
                                         <i class="fa fa-btn fa-trash"></i>Xoá
@@ -93,6 +80,7 @@ Danh sách người dùng
                                 </form>
                                 </td>
                             </tr>
+                            @endif
                             @endforeach
                             </tbody>
                         </table>

@@ -1,6 +1,6 @@
 @extends('backend.layouts.master')
 @section('title')
-Danh sách ảnh sản phẩm
+Đơn hàng {{ $order->id }}
 @endsection
 @section('css')
     
@@ -17,9 +17,9 @@ Danh sách ảnh sản phẩm
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item">sản phẩm</li>
-                            <li class="breadcrumb-item active">Danh sách ảnh</li>
+                            <li class="breadcrumb-item"><a href="{{ route('backend.dashboard') }}">Home</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('backend.order.index') }}"></a>Danh sách đơn hàng</li>
+                            <li class="breadcrumb-item active">Đơn hàng {{ $order->id }}</li>
                         </ol>
                     </div><!-- /.col -->
                 </div>
@@ -34,14 +34,9 @@ Danh sách ảnh sản phẩm
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Sản phẩm</h3>
+                        <h3 class="card-title">Đơn hàng {{ $order->id }}</h3>
                         <div class="card-tools">
-                            <div class="input-group input-group-sm" style="width: 150px;">
-                                <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-                                <div class="input-group-append">
-                                    <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
-                                </div>
-                            </div>
+                            <h3 class="card-title">Trạng thái {{ $order->id }}</h3>
                         </div>
                     </div>
                     <!-- /.card-header -->
@@ -51,15 +46,19 @@ Danh sách ảnh sản phẩm
                             <tr>
                                 <th>STT</th>
                                 <th>Tên sản phẩm</th>
-                                <th>giá</th>
+                                <th>Số lượng</th>
+                                <th>Giá</th>
+                                <th style="text-align: right;">Thành tiền</th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($products as $key => $product)
                             <tr>
                                 <td>{{$key+1}}</td>
-                                <td>{{$product->name}}</td>
-                                <td>{{$product->sale_price}}</td>
+                                <td><a href="{{ route('backend.product.show',$product->id) }}">{{$product->name}}</a></td>
+                                <td>{{ number_format($amount[$product->id]) }}</td>
+                                <td>{{ number_format($product->sale_price)}}</td>
+                                <td style="text-align: right;">{{ number_format($product->sale_price*$amount[$product->id]) }}</td>
                             </tr>
                             @endforeach
                             </tbody>
@@ -67,6 +66,23 @@ Danh sách ảnh sản phẩm
                         {!! $products->links() !!}
                     </div>
                     <!-- /.card-body -->
+                    <div class="card-header">
+                        <h3 class="card-title">Tổng tiền</h3>
+                        <div class="card-tools" style="text-align: right;">
+                            <p>{{ number_format($order->money) }}</p>
+                        </div>
+                    </div>
+                    @if($order->status==0)
+                    <div class="card-footer">
+                        <form action="{{ route('backend.order.confirm', $order->id ) }}" method="POST" style="display: inline;">
+                            {{ csrf_field() }}
+                            {{ method_field('PUT') }}
+                            <button type="submit" class="btn btn-success">
+                                Xác nhận
+                            </button>
+                        </form>
+                    </div>
+                    @endif
                 </div>
                 <!-- /.card -->
             </div>
