@@ -16,6 +16,7 @@ class DashboardController extends Controller
 	}
     public function index(){
     	$products = Product::all()->count();
+        $recent_products = Product::orderByRaw('created_at DESC')->get();
     	$orders = Order::all()->count();
     	$users = User::where('role', 0)->count();
 
@@ -24,6 +25,7 @@ class DashboardController extends Controller
 		}else
     	return view('backend.dashboard')->with([
     		'products' => $products,
+            'recent_products' => $recent_products,
     		'orders' => $orders,
     		'users' => $users
     	]);

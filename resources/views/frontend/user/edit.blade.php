@@ -1,4 +1,4 @@
-@extends('frontend.layouts.master')
+@extends('frontend.layouts.user_master')
 @section('title')
 Cập nhật
 @endsection

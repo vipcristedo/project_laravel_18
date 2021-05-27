@@ -48,16 +48,16 @@ Danh sách sản phẩm
                                 <th>User ID</th>
                                 <th>Tổng tiền</th>
                                 <th>thời gian đặt</th>
-                                <th  style="text-align: center;">Trạng thái</th>
-                                <th>Act</th>
+                                <th style="text-align: center;">Trạng thái</th>
+                                <th>Hành động</th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($orders as $key => $order)
                             <tr>
                                 <td>{{$key+1}}</td>
-                                <td><a href="{{ route('backend.user.show',$order->user_id) }}">{{ \DB::table('users')->where('id',$order->user_id)->value('name') }}</a></td>
-                                <td>{{number_format($order->money)}}</td>
+                                <td><a href="{{ route('backend.user.show',$order->user_id) }}" data-toggle="tooltip" title="Xem thông tin">{{ \DB::table('users')->where('id',$order->user_id)->value('name') }}</a></td>
+                                <td style="text-align: right;">{{number_format($order->money)}}</td>
                                 <td>{{ $order->created_at }}</td>
                                 <td style="text-align: center;">
                                     @if($order->status==0)

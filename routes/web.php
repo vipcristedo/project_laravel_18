@@ -14,8 +14,13 @@
 //Route::get('/','Frontend\HomeController@index');
 Auth::routes();
 
-Route::get('/test','HomeController@test');
-Route::post('/hi','HomeController@getTest')->name('test');
+Route::get('/home', 'HomeController@index')->name('home');
+
+// Route::post('/hi','HomeController@getTest')->name('test');
+Route::post('/password/mail','Auth\ForgotPasswordController@sendCodeResetPassword')->name('send.reset.password.mail');
+Route::get('/password/reset/confirm','Auth\ResetPasswordController@showResetForm')->name('get.link.reset.password');
+Route::post('/password/reset/confirm','Auth\ResetPasswordController@resetPassword')->name('reset.password');
+
 Route::group([
 	'namespace'=>'Frontend'
 ],function(){
@@ -23,6 +28,7 @@ Route::group([
 	Route::get('/about','HomeController@about')->name('about');
 	Route::get('/checkout','HomeController@checkout')->name('checkout');
 	Route::get('/show','HomeController@show')->name('show');
+	Route::get('product/find', 'HomeController@find')->name('frontend.product.find');
 
 	Route::group([
 		'prefix'=>'category',
@@ -63,6 +69,8 @@ Route::group([
 		Route::get('change-password','UserController@changePasswordForm')->name('frontend.user.changePasswordForm');
 		Route::match(['put','patch'],'/','UserController@update')->name('frontend.user.update');
 		Route::match(['put','patch'],'change-password','UserController@changePassword')->name('frontend.user.changePassword');
+		Route::get('orders', 'UserController@orders')->name('frontend.user.orders');
+		Route::get('orders/{id}', 'UserController@showOrder')->name('frontend.user.showOrder');
 	});
 });
 
@@ -147,5 +155,3 @@ Route::group([
 		Route::delete('/{id}','OrderController@destroy')->name('backend.order.delete');
 	});
 });
-
-Route::get('/home', 'HomeController@index')->name('home');

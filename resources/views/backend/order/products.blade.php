@@ -36,7 +36,13 @@
                     <div class="card-header">
                         <h3 class="card-title">Đơn hàng {{ $order->id }}</h3>
                         <div class="card-tools">
-                            <h3 class="card-title">Trạng thái {{ $order->id }}</h3>
+                            <h3 class="card-title">Trạng thái: @if($order->status==0)
+                                        Chờ xác nhận
+                                    @elseif($order->status==1)
+                                        Đang giao
+                                    @else
+                                        Đã hoàn thành
+                                    @endif</h3>
                         </div>
                     </div>
                     <!-- /.card-header -->
@@ -63,7 +69,6 @@
                             @endforeach
                             </tbody>
                         </table>
-                        {!! $products->links() !!}
                     </div>
                     <!-- /.card-body -->
                     <div class="card-header">
@@ -72,8 +77,8 @@
                             <p>{{ number_format($order->money) }}</p>
                         </div>
                     </div>
-                    @if($order->status==0)
                     <div class="card-footer">
+                        @if($order->status==0)
                         <form action="{{ route('backend.order.confirm', $order->id ) }}" method="POST" style="display: inline;">
                             {{ csrf_field() }}
                             {{ method_field('PUT') }}
@@ -81,8 +86,21 @@
                                 Xác nhận
                             </button>
                         </form>
+                        @endif
+                        @if($order->status==1)
+                        <form action="{{ route('backend.order.complete', $order->id ) }}" method="POST" style="display: inline;">
+                            {{ csrf_field() }}
+                            {{ method_field('PUT') }}
+                            <button type="submit" class="btn btn-success">
+                                Hoàn thành
+                            </button>
+                        </form>
+                        @endif
+                        <a href="{{ route('backend.order.index') }}" class="btn btn-default">
+                            Trở lại
+                        </a>
                     </div>
-                    @endif
+                    
                 </div>
                 <!-- /.card -->
             </div>

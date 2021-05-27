@@ -16,7 +16,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- font-awesome icons -->
 <link href="{{ asset('frontend/css/font-awesome.css') }}" rel="stylesheet" type="text/css" media="all" /> 
 <!-- //font-awesome icons -->
+<link rel="stylesheet" href="/backend/plugins/fontawesome-free/css/all.min.css">
 <!-- js -->
+<script src="/backend/plugins/jquery/jquery.min.js"></script>
 <script src="{{ asset('frontend/js/jquery-1.11.1.min.js') }}"></script>
 <!-- //js -->
 <link href='//fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,500,500italic,700,700italic' rel='stylesheet' type='text/css'>
@@ -44,7 +46,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 <!-- banner -->
 	<div class="banner">
-		@include('frontend.includes.sidebar')
+		@include('frontend.includes.user_sidebar')
 		<div class="w3l_banner_nav_right">
 			@yield('banner_nav_right')
 			@yield('banner_content')

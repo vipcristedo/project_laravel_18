@@ -1,16 +1,11 @@
 @extends('frontend.layouts.master')
 @section('title')
-{{ $category->name }}
-@endsection
-
-@section('banner_nav_right')
-<div class="w3l_banner_nav_right_banner" style="background: url({{ asset($banner) }}) no-repeat 0px 0px; margin: 0;">
-</div>
+Tìm kiếm sản phẩm
 @endsection
 
 @section('banner_content')
 	<div class="w3ls_w3l_banner_nav_right_grid w3ls_w3l_banner_nav_right_grid_sub">
-		<h3>{{ $category->name }}</h3>
+		<h3>Kết quả cho "{{ $key }}"</h3>
 		<div class="w3ls_w3l_banner_nav_right_grid1">
 			@foreach($products as $product)
 			<div class="col-md-3 w3ls_w3l_banner_left">

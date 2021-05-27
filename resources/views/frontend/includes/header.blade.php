@@ -1,10 +1,10 @@
 <div class="agileits_header">
 		<div class="w3l_offers">
-			<a href="products.html">Khuyến mại hôm nay !</a>
+			<a href="#">Khuyến mại hôm nay !</a>
 		</div>
 		<div class="w3l_search">
-			<form action="#" method="post">
-				<input type="text" name="Product" placeholder="Tìm kiếm sản phẩm ..." required="" onkeyup="search(this.value)">
+			<form action="{{ route('frontend.product.find') }}" method="get">
+				<input type="text" name="key" placeholder="Tìm kiếm sản phẩm ..." required="" >
 				<input type="submit" value=" ">
 			</form>
 			{{-- <script type="text/javascript">
@@ -59,13 +59,12 @@
 									@if(Auth::user()->role != 0)
 									<li><a href="{{ route('backend.dashboard') }}">Quản lý</a></li>
 									@endif
-									<li><a href="{{ route('logout') }}" class="" onclick="
-									event.preventDefault();
-									document.getElementById('logout-form').submit();
-									"><i class="fas fa-sign-out-alt"></i>Đăng xuất</a>
-			                        <form id="logout-form" action="{{ route('logout') }}" method="POST">
-			                        @csrf
-			                        </form>
+									<li><a href="{{ route('frontend.user.orders') }}">Đơn của tôi</a></li>
+									<li>
+										<a href="{{ route('logout') }}" class="" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="fas fa-sign-out-alt"></i>Đăng xuất</a>
+				                        <form id="logout-form" action="{{ route('logout') }}" method="POST">
+				                        	@csrf
+				                        </form>
 	                    			</li>
 								</ul>
 							</div>                  
@@ -104,13 +103,13 @@
 			</div>
 			<div class="w3ls_logo_products_left1">
 				<ul class="special_items">
-					<li><a href="{{ route('about') }}">About Us</a><i></i></li>
+					<li><a href="{{ route('about') }}">Về chúng tôi</a><i></i></li>
 				</ul>
 			</div>
 			<div class="w3ls_logo_products_left1">
 				<ul class="phone_email">
 					<li><i class="fa fa-phone" aria-hidden="true"></i>(+84) 984 701 585</li>
-					<li><i class="fa fa-envelope-o" aria-hidden="true"></i><a href="mailto:sang.pq183974@sis.hust.com">sang.pq183974@sis.hust.com</a></li>
+					<li><i class="fa fa-envelope-o" aria-hidden="true"></i><a href="mailto:sang.pq183974@sis.hust.edu.vn">sang.pq183974@sis.hust.edu.vn</a></li>
 				</ul>
 			</div>
 			<div class="clearfix"> </div>

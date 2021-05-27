@@ -65,14 +65,16 @@ class UserController extends Controller
         }
     	return view('frontend.user.show');
     }
+
     public function orders(){
-        $orders = User::findOrFail(Auth::user())->orders;
+        $orders = User::findOrFail(Auth::user())->first()->orders()->get();
         return view('frontend.user.orders')->with([
             'orders'=>$orders
         ]);
     }
-    public function order($order_id){
-        $order = Order::findOrFail($order_id);
+
+    public function showOrder($order_id){
+        $order = Order::where('id', $order_id)->firstOrFail();
         $products = $order->products;
         $amount = array();
         foreach ($products as $product) {

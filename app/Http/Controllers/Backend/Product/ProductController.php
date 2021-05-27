@@ -12,11 +12,19 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\StoreProductRequest;
 use Illuminate\Support\Facades\Storage;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ProductController extends Controller
 {
-    public function index(){
-    	$products= Product::orderByRaw('created_at DESC')->paginate(8);
+    public function index(Request $request){
+    	$products = Product::orderByRaw('created_at DESC');
+        if($request->key){
+            $products = $products->where('name', 'like', '%'.$request->key.'%')->orWhere('id', 'like', '%'.$request->key.'%');
+        }
+        $products = $products->paginate(8);
+        if($request->key){
+            $products = $products->appends(['key' => $request->key]);
+        }
     	return view('backend.product.index')->with('products', $products);
     }
     public function create(){
@@ -24,8 +32,6 @@ class ProductController extends Controller
         return view('backend.product.create')->with([
             'categories'=>$categories
         ]);
-        // Storage::disk('public')->deleteDirectory('images');
-        // dd(1);
     }
     public function store(StoreProductRequest $request){
 

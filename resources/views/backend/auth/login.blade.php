@@ -3,7 +3,7 @@
 Đăng nhập
 @endsection
 @section('login-box-msg')
-Sign in
+Đăng nhập
 @endsection
 @section('content')
 <form action="{{ route('login') }}" method="post">
@@ -39,15 +39,11 @@ Sign in
     <div class="row">
         <div class="col-8">
             <div class="icheck-primary">
-                <input type="checkbox" id="remember">
-                <label for="remember">
-                    Remember Me
-                </label>
             </div>
         </div>
         <!-- /.col -->
-        <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary btn-block btn-flat">Đăng nhập</button>
         </div>
         <!-- /.col -->
     </div>
@@ -55,9 +51,9 @@ Sign in
 @endsection
 @section('or')
 <p class="mb-1">
-    <a href="#">I forgot my password</a>
+    <a href="{{ route('password.request') }}">Quên mật khẩu</a>
 </p>
 <p class="mb-0">
-    <a href="{{ route('register') }}" class="text-center">Register a new membership</a>
+    <a href="{{ route('register') }}" class="text-center">Đăng ký</a>
 </p>
 @endsection

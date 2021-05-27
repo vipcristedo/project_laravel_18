@@ -7,15 +7,14 @@ use App\Product;
 use App\Order;
 use Illuminate\Http\Request;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class CartController extends Controller
 {
-    public function index(){
-    	dd(\Cart::content());
-    }
     public function add($product_id){
-    	$product = Product::findOrFail($product_id);
-    	$status = \Cart::add($product->id, $product->name, 1, $product->sale_price, 0);
+    	$product = Product::where('id', $product_id)->first();
+    	\Cart::add($product->id, $product->name, 1, $product->sale_price, 0);
+        // alert()->warning('Giỏ hàng trống', 'Vui lòng thêm đồ vào giỏ hàng');
     	return redirect()->back();
     }
     public function remove($rowId){
@@ -40,14 +39,18 @@ class CartController extends Controller
     	dd(\Cart::total());
     }
     public function confirm(){
+        $cart = \Cart::content();
         if(\Auth::user()==null){
             return redirect()->route('login');
+        }
+        if($cart->count() == 0){
+            alert()->warning('Giỏ hàng trống', 'Vui lòng thêm đồ vào giỏ hàng');
+            return redirect()->route('index');
         }
         $order = new Order;
         $order->user_id = \Auth::user()->id;
         $order->money = \Cart::total();
         $order->save();
-        $cart = \Cart::content();
         foreach ($cart as $cartItem) {
             \DB::table('order_product')->insert([
                 'order_id'=>$order->id,

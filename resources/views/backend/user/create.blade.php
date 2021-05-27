@@ -95,8 +95,8 @@ Tạo mới người dùng
                             <div class="form-group">
                                 <label>Quyền</label>
                                 <select class="form-control select2" style="width: 100%;" name="role">
-                                    <option value="1">Admin</option>
-                                    <option value="0">User</option>
+                                    <option value="1">Quản lý</option>
+                                    <option value="0">Người dùng</option>
                                 </select>
                             </div>
                         </div>

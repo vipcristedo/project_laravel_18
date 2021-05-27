@@ -14,7 +14,6 @@
     <!-- Tempusdominus Bbootstrap 4 -->
     <link rel="stylesheet" href="/backend/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
     <!-- iCheck -->
-    <link rel="stylesheet" href="/backend/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <!-- JQVMap -->
     <link rel="stylesheet" href="/backend/plugins/jqvmap/jqvmap.min.css">
     <!-- Theme style -->
@@ -24,7 +23,6 @@
     <!-- Daterange picker -->
     <link rel="stylesheet" href="/backend/plugins/daterangepicker/daterangepicker.css">
     <!-- summernote -->
-    <link rel="stylesheet" href="/backend/plugins/summernote/summernote-bs4.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <style type="text/css">
@@ -82,7 +80,6 @@
 <!-- Tempusdominus Bootstrap 4 -->
 <script src="/backend/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
 <!-- Summernote -->
-<script src="/backend/plugins/summernote/summernote-bs4.min.js"></script>
 <!-- overlayScrollbars -->
 <script src="/backend/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <!-- AdminLTE App -->
@@ -90,7 +87,8 @@
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="/backend/dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="/backend/dist/js/demo.js"></script>
+@include('sweetalert::alert')
+<script src="{{ asset('backend/js/sweetalert.min.js') }}"></script>
 <script>
 $(document).ready(function(){
   $('[data-toggle="tooltip"]').tooltip();   

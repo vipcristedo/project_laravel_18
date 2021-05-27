@@ -72,7 +72,7 @@ Danh sách hạng mục
                             @endforeach
                             </tbody>
                         </table>
-                        {!! $categories->links() !!}
+                        {!! $categories->links('vendor.pagination.bootstrap-4') !!}
                     </div>
                     <!-- /.card-body -->
                 </div>

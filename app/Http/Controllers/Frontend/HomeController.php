@@ -56,9 +56,11 @@ class HomeController extends Controller
 
     	return view('frontend.product.show');
     }
+
     public function about(){
     	return view('frontend.about');
     }
+
     public function checkout(){
         $cart = \Cart::content();
         $images = array();
@@ -68,6 +70,18 @@ class HomeController extends Controller
     	return view('frontend.checkout')->with([
             'cart'=>$cart,
             'images'=>$images
+        ]);
+    }
+
+    public function find(Request $request){
+        $products = Product::where('name', 'like', '%'.$request->key.'%')->get();
+        foreach ($products as $product) {
+            $images[$product->id]=$product->images()->first();
+        }
+        return view('frontend.products')->with([
+            'products' => $products,
+            'key' => $request->key,
+            'images' => $images
         ]);
     }
 }

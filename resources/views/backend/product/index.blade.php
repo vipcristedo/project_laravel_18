@@ -6,7 +6,46 @@ Danh sách sản phẩm
     
 @endsection
 @section('js')
-
+<script type="text/javascript">
+    function deleteProduct(productId){
+        swal({
+          title: "Bạn có chắc muốn xóa sản phẩm này không?",
+          text: "Hành động không thể hoàn tác",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+                $.ajax({
+                    type: "POST",
+                    url: '/admin/playlist/delete/'+playlistId,
+                    data : {'_method' : 'DELETE', '_token' : '{{ csrf_token() }}'},
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(response) {
+                        swal({
+                            title : "Xóa sản phẩm thành công",
+                            icon : "success",
+                            button : "Done",
+                        }).then(() => {
+                            location.reload();
+                        });
+                    },
+                    error: function(data) {
+                        swal({
+                            title : "Xóa sản phẩm thất bại",
+                            icon : "warning",
+                        });
+                    }
+                });
+            } else {
+                swal("Hủy thành công!");
+            }
+        });
+    }
+</script>
 @endsection
 @section('content-header')
         <div class="content-header">
@@ -37,7 +76,7 @@ Danh sách sản phẩm
                 <div class="card">
                     <div class="card-header">
                         <a href="{{ route('backend.product.create') }}" class="btn btn-primary">Tạo mới</a> 
-                        {{-- <form action="GET" style="float: right">
+                        {{-- <form action="" style="float: right">
                             <select name = "day_created">
                                 <option value="true">cũ nhất</option>
                                 <option value="fail">mới nhất</option>
@@ -51,6 +90,16 @@ Danh sách sản phẩm
                                 <option value="fail">cháy hàng</option>
                             </select>
                         </form> --}}
+                        <div class="card-tools">
+                            <form action="" method="GET">
+                                <div class="input-group input-group-sm" style="width: 150px;">
+                                    <input type="text" name="key" class="form-control float-right" placeholder="Tìm kiếm">
+                                    <div class="input-group-append">
+                                        <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
 
                     <!-- /.card-header -->
@@ -76,25 +125,21 @@ Danh sách sản phẩm
                                 <td><a href="{{ route('backend.category.show',$product->category_id) }}">{{\DB::table('categories')->where('id',$product->category_id)->value('name')}}</a></td>
 
                                 <td>
-                                    <form action="{{ route('backend.product.delete', $product->id ) }}" method="POST">
-                                        {{ csrf_field() }}
-                                        {{ method_field('DELETE') }}
-                                        @can('update',$product)
-                                        <a href="{{ route('backend.product.edit',$product->id)}}" class="btn btn-info">Sửa</a>
-                                        @endcan
-                                        <a href="{{ route('backend.product.showImages',$product->id)}}" class="btn btn-success">Ảnh</a>
-                                        @can('delete',$product)
-                                        <button type="submit" class="btn btn-warning">
-                                            <i class="fa fa-btn fa-trash"></i>Xoá
-                                        </button>
-                                        @endcan
-                                    </form>
+                                    @can('update',$product)
+                                    <a href="{{ route('backend.product.edit',$product->id)}}" class="btn btn-info">Sửa</a>
+                                    @endcan
+                                    <a href="{{ route('backend.product.showImages',$product->id)}}" class="btn btn-success">Ảnh</a>
+                                    @can('delete',$product)
+                                    <button class="btn btn-warning" data-toggle="tooltip" title="Xóa" onclick="event.preventDefault();deleteProduct({{ $product->id }})" >
+                                        <i class="fa fa-btn fa-trash"></i>Xoá
+                                    </button>
+                                    @endcan
                                 </td>
                             </tr>
                             @endforeach
                             </tbody>
                         </table>
-                        {!! $products->links() !!}
+                        {!! $products->links('vendor.pagination.bootstrap-4') !!}
                     </div>
                     <!-- /.card-body -->
                 </div>

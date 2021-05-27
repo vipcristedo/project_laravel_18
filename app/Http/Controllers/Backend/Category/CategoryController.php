@@ -12,8 +12,15 @@ use App\Category;
 use App\Product;
 class CategoryController extends Controller
 {
-    public function index(){
-    	$categories = Category::orderByRaw('created_at DESC')->paginate(8);
+    public function index(Request $request){
+    	$categories = Category::orderByRaw('created_at DESC');
+        if($request->key){
+            $categories = $categories->where('name', 'like', '%'.$request->key.'%')->orWhere('id', 'like', '%'.$request->key.'%');
+        }
+        $categories = $categories->paginate(8);
+        if($request->key){
+            $categories = $categories->appends(['key' => $request->key]);
+        }
     	return view('backend.category.index')->with('categories', $categories);
     }
 

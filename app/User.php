@@ -38,11 +38,15 @@ class User extends Authenticatable
     ];
 
     public function userInfor(){
-        return $this->hasOne(UserInfor::class, 'user_id','id');
+        return $this->hasOne(UserInfor::class, 'user_id', 'id');
     }
     
     public function products(){
-        return $this->hasMany(\App\Product::class, 'user_id','id');
+        return $this->hasMany(\App\Product::class, 'user_id', 'id');
+    }
+
+    public function orders(){
+        return $this->hasMany(\App\Order::class, 'user_id', 'id');
     }
 
 }

@@ -8,12 +8,20 @@ use App\User;
 use App\Http\Requests\StoreUserAdminRequest;
 class UserController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
     	//$users = \DB::table('users')->get();
     	//$users = User::get();
 
     	//$users = \App\User::paginate(15);
-        $users = \App\User::paginate(15);
+
+        $users = \App\User::orderByRaw('id asc');
+        if($request->key){
+            $users = $users->where('name', 'like', '%'.$request->key.'%')->orWhere('id', 'like', '%'.$request->key.'%');
+        }
+        $users = $users->paginate(15);
+        if($request->key){
+            $users = $users->appends(['key' => $request->key]);
+        }
 
     	//$users = User::simplePaginate(15);
 

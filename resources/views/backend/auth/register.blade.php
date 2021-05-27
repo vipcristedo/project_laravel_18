@@ -3,14 +3,14 @@
 Đăng ký
 @endsection
 @section('login-box-msg')
-Sign up
+Đăng ký
 @endsection
 @section('content')
 <form method="POST" action="{{ route('register') }}">
     @csrf
 
     <div class="input-group mb-3">
-      <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" placeholder="Full name" autofocus>
+      <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" placeholder="Họ và tên" autofocus>
       <div class="input-group-append">
         <div class="input-group-text">
           <span class="fas fa-user"></span>
@@ -38,7 +38,7 @@ Sign up
     </div>
 
     <div class="input-group mb-3">
-      <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" required placeholder="Address">
+      <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" required placeholder="Địa chỉ">
       <div class="input-group-append">
         <div class="input-group-text">
           <span class="fa fa-address-card" aria-hidden="true"></span>
@@ -52,7 +52,7 @@ Sign up
     </div>
     
     <div class="input-group mb-3">
-      <input id="phone" type="number" class="form-control @error('phone') is-invalid @enderror" name="phone" required placeholder="Phone">
+      <input id="phone" type="number" class="form-control @error('phone') is-invalid @enderror" name="phone" required placeholder="Số điện thoại">
       <div class="input-group-append">
         <div class="input-group-text">
           <span class="fa fa-phone" aria-hidden="true"></span>
@@ -66,7 +66,7 @@ Sign up
     </div>
 
     <div class="input-group mb-3">
-      <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Password">
+      <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Mật khẩu">
       <div class="input-group-append">
         <div class="input-group-text">
           <span class="fas fa-lock"></span>
@@ -80,7 +80,7 @@ Sign up
     </div>
 
     <div class="input-group mb-3">
-      <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Retype password">
+      <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Nhập lại mật khẩu">
       <div class="input-group-append">
         <div class="input-group-text">
           <span class="fas fa-lock"></span>
@@ -90,7 +90,7 @@ Sign up
 
     <div class="row">
       <div class="col-4">
-        <button type="submit" class="btn btn-primary">{{ __('Register') }}</button>
+        <button type="submit" class="btn btn-primary">{{ __('Đăng ký') }}</button>
       </div>
       <!-- /.col -->
     </div>
@@ -98,6 +98,6 @@ Sign up
 @endsection
 @section('or')
 <p class="mb-1">
-    <a href="{{ route('login') }}">I've already had an account! Login?</a>
+    <a href="{{ route('login') }}">Đã có tài khoản! Đăng nhập</a>
 </p>
 @endsection

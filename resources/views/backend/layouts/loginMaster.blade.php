@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,8 +22,6 @@
     <link rel="stylesheet" href="/backend/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <!-- Daterange picker -->
     <link rel="stylesheet" href="/backend/plugins/daterangepicker/daterangepicker.css">
-    <!-- summernote -->
-    <link rel="stylesheet" href="/backend/plugins/summernote/summernote-bs4.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     @yield('css')
@@ -42,9 +39,6 @@
 
             @yield('content')
 
-            <div class="social-auth-links text-center mb-3">
-                <p>- OR -</p>
-            </div>
             <!-- /.social-auth-links -->
 
             @yield('or')
@@ -78,7 +72,6 @@
 <!-- Tempusdominus Bootstrap 4 -->
 <script src="/backend/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
 <!-- Summernote -->
-<script src="/backend/plugins/summernote/summernote-bs4.min.js"></script>
 <!-- overlayScrollbars -->
 <script src="/backend/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <!-- AdminLTE App -->
@@ -87,6 +80,7 @@
 <script src="/backend/dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="/backend/dist/js/demo.js"></script>
+@include('sweetalert::alert')
 @yield('js')
 </body>
 </html>

@@ -90,30 +90,10 @@ Check Out
 		</div>
 	</div>
 	@endif
-	<html>
-       <head>
-          <title>The jQuery Example</title>
-          <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-          <script type="text/javascript" language="javascript">
-             $(document).ready(function() {
-                $("#driver").click(function(event){
-                   $('#stage').load('{{ route('frontend.cart.add',1) }}');
-                });
-             });
-          </script>
-       </head>
-       <body>
-          <div id="stage">
-             STAGE {{ \Cart::total() }}
-          </div>
-          <input type="button" id="driver" value="Load Data" />
-       </body>
-    </html>
 @endsection
 
 @section('js')
 <!-- js -->
-<script src="js/jquery-1.11.1.min.js"></script>
  <!--quantity-->
 <!-- //js -->
 @endsection

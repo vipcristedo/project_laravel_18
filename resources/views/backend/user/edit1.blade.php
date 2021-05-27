@@ -1,6 +1,6 @@
 @extends('backend.layouts.master')
 @section('title')
-Tạo mới người dùng
+Thay đổi thông tin cá nhân
 @endsection
 @section('css')
     
@@ -14,7 +14,7 @@ Tạo mới người dùng
 <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark">Tạo người dùng</h1>
+                <h1 class="m-0 text-dark">Thay đổi thông tin cá nhân</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -37,7 +37,7 @@ Tạo mới người dùng
                 <!-- general form elements -->
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Cập nhật người dùng</h3>
+                        <h3 class="card-title">Cập nhật thông tin</h3>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
