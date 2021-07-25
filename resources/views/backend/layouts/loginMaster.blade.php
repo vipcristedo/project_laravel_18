@@ -26,11 +26,11 @@
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     @yield('css')
 </head>
-<body class="hold-transition login-page">
+<body class="hold-transition login-page" style="background-image: url('{{ asset('/storage/images/hinh-nen-dang-nhap.jpg') }}'); background-repeat: no-repeat; background-size: cover">
 
 <div class="login-box">
-    <div class="login-logo">
-        <a href="{{ route('index') }}"><b>Grocery</b>Store</a>
+    <div class="login-logo" style="background-image: linear-gradient(green, yellow); border-top-right-radius: 20px; border-top-left-radius: 20px; margin: 0px; padding: 20px 0;">
+        <a href="{{ route('index') }}" style="color: white;"><b>Grocery</b>Store</a>
     </div>
     <!-- /.login-logo -->
     <div class="card">

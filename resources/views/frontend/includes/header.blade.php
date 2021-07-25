@@ -99,11 +99,11 @@
 	<div class="logo_products">
 		<div class="container">
 			<div class="w3ls_logo_products_left">
-				<h1><a href="{{ route('index') }}"><span>Grocery</span> Store</a></h1>
+				<h1><a href="{{ route('index') }}" style="font-family: Arial; font-weight: 900;"><span style="font-family: Helvetica; font-weight: 900;">Grocery</span> Store</a></h1>
 			</div>
 			<div class="w3ls_logo_products_left1">
 				<ul class="special_items">
-					<li><a href="{{ route('about') }}">Về chúng tôi</a><i></i></li>
+					<li><a href="{{ route('contact') }}">Liên hệ</a><i></i></li>
 				</ul>
 			</div>
 			<div class="w3ls_logo_products_left1">

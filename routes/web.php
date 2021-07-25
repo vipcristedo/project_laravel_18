@@ -25,7 +25,8 @@ Route::group([
 	'namespace'=>'Frontend'
 ],function(){
 	Route::get('/','HomeController@index')->name('index');
-	Route::get('/about','HomeController@about')->name('about');
+	Route::get('contact','HomeController@contact')->name('contact');
+	Route::post('contact', 'HomeController@submitContacr')->name('submitContact');
 	Route::get('/checkout','HomeController@checkout')->name('checkout');
 	Route::get('/show','HomeController@show')->name('show');
 	Route::get('product/find', 'HomeController@find')->name('frontend.product.find');
@@ -54,7 +55,7 @@ Route::group([
 		'prefix'=>'product',
 		'namespace'=>'Product'
 	],function(){
-		Route::get('/{id}','ProductController@show')->name('frontend.product.show');
+		Route::get('/details/{id}','ProductController@show')->name('frontend.product.show');
 		Route::get('search/{key}','ProductController@search')->name('frontend.product.search');
 
 	});
@@ -99,9 +100,7 @@ Route::group([
 
 		Route::get('products/{id}','UserController@showProducts')->name('backend.user.showProducts');
 
-		Route::delete('/{id}','UserController@destroy')->name('backend.user.delete');
-
-		Route::get('/test/{id}','UserController@test')->name('backend.user.test');
+		Route::delete('delete/{id}','UserController@destroy')->name('backend.user.delete');
 	});
 
 	Route::group([
@@ -119,7 +118,7 @@ Route::group([
 
 		Route::get('/{id}','ProductController@show')->name('backend.product.show');
 		Route::get('/orders/{id}','ProductController@showOrders')->name('backend.product.showOrders');
-		Route::delete('/{id}','ProductController@destroy')->name('backend.product.delete');
+		Route::delete('/delete/{id}','ProductController@destroy')->name('backend.product.delete');
 		Route::get('/images/{id}','ProductController@showImages')->name('backend.product.showImages');
 		
 		Route::get('/test','ProductController@test');
@@ -137,9 +136,18 @@ Route::group([
 		Route::get('/edit/{id}','CategoryController@edit')->name('backend.category.edit');
 		Route::match(['put','patch'],'/{id}','CategoryController@update')->name('backend.category.update');
 
-		Route::delete('/{id}','CategoryController@destroy')->name('backend.category.delete');
+		Route::delete('/delete/{id}','CategoryController@destroy')->name('backend.category.delete');
 
 		Route::get('products/{id}','CategoryController@showProducts')->name('backend.category.showProducts');
+	});
+
+	Route::group([
+		'prefix'=>'contact',
+		'namespace'=>'Contact'
+	],function(){
+		Route::get('/index','ContactController@index')->name('backend.contact.index');
+		Route::get('/show/{id}','ContactController@show')->name('backend.contact.show');
+		Route::delete('/delete/{id}','ContactController@destroy')->name('backend.contact.delete');
 	});
 
 	Route::group([
@@ -152,6 +160,6 @@ Route::group([
 		Route::get('confirm','OrderController@confirm')->name('backend.order.confirm')->middleware('auth');
 		Route::match(['put','patch'],'confirm/{order_id}','OrderController@confirm')->name('backend.order.confirm')->middleware('auth');
 		Route::match(['put','patch'],'complete/{order_id}','OrderController@complete')->name('backend.order.complete')->middleware('auth');
-		Route::delete('/{id}','OrderController@destroy')->name('backend.order.delete');
+		Route::delete('/delete/{id}','OrderController@destroy')->name('backend.order.delete');
 	});
 });

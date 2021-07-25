@@ -114,6 +114,5 @@ class OrderController extends Controller
             }
         }
         $order->delete();
-        return redirect()->route('backend.order.index');
     }
 }

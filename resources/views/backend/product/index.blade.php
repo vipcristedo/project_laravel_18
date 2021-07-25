@@ -7,7 +7,7 @@ Danh sách sản phẩm
 @endsection
 @section('js')
 <script type="text/javascript">
-    function deleteProduct(productId){
+    function deleteProduct(id){
         swal({
           title: "Bạn có chắc muốn xóa sản phẩm này không?",
           text: "Hành động không thể hoàn tác",
@@ -19,14 +19,14 @@ Danh sách sản phẩm
             if (willDelete) {
                 $.ajax({
                     type: "POST",
-                    url: '/admin/playlist/delete/'+playlistId,
+                    url: "/admin/product/delete/"+id,
                     data : {'_method' : 'DELETE', '_token' : '{{ csrf_token() }}'},
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     success: function(response) {
                         swal({
-                            title : "Xóa sản phẩm thành công",
+                            title : "Xóa thành công",
                             icon : "success",
                             button : "Done",
                         }).then(() => {
@@ -35,7 +35,7 @@ Danh sách sản phẩm
                     },
                     error: function(data) {
                         swal({
-                            title : "Xóa sản phẩm thất bại",
+                            title : "Xóa thất bại",
                             icon : "warning",
                         });
                     }

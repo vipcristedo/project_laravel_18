@@ -6,7 +6,46 @@ Danh sách sản phẩm
     
 @endsection
 @section('js')
-
+<script type="text/javascript">
+    function deleteOrder(id){
+        swal({
+          title: "Bạn có chắc muốn xóa hóa đơn này không?",
+          text: "Hành động không thể hoàn tác",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+                $.ajax({
+                    type: "POST",
+                    url: "/admin/order/delete/"+id,
+                    data : {'_method' : 'DELETE', '_token' : '{{ csrf_token() }}'},
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(response) {
+                        swal({
+                            title : "Xóa thành công",
+                            icon : "success",
+                            button : "Done",
+                        }).then(() => {
+                            location.reload();
+                        });
+                    },
+                    error: function(data) {
+                        swal({
+                            title : "Xóa thất bại",
+                            icon : "warning",
+                        });
+                    }
+                });
+            } else {
+                swal("Hủy thành công!");
+            }
+        });
+    }
+</script>
 @endsection
 @section('content-header')
         <div class="content-header">
@@ -79,15 +118,11 @@ Danh sách sản phẩm
                                         </button>
                                     </form>
                                     @endif
-                                    <form action="{{ route('backend.order.delete', $order->id ) }}" method="POST" style="display: inline;">
-                                        {{ csrf_field() }}
-                                        {{ method_field('DELETE') }}
-                                        @can('delete',$order)
-                                        <button type="submit" class="btn btn-warning">
-                                            <i class="fa fa-btn fa-trash"></i>Xoá
-                                        </button>
-                                        @endcan
-                                    </form>
+                                    @can('delete',$order)
+                                    <button class="btn btn-warning" data-toggle="tooltip" title="Xóa" onclick="event.preventDefault();deleteOrder({{ $order->id }})" >
+                                    <i class="fa fa-btn fa-trash"></i>Xoá
+                                    </button>
+                                    @endcan
                                 </td>
                             </tr>
                             @endforeach

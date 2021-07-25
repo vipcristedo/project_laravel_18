@@ -13,15 +13,13 @@ class UsersTableSeeder extends Seeder
     {
     	DB::table('users')->truncate();
 
-    	for ($i=1;$i<=20;$i++){
     	DB::table('users')->insert([
-        	'name'=>'admin'.$i,
-        	'email'=>'vipcristedo'.$i.'@gmail.com',
+        	'name'=>'admin'.1,
+        	'email'=>'vipcristedo'.1.'@gmail.com',
         	'password'=>bcrypt('123456'),
         	'role'=>2,
         	'phone'=>'0984701585',
         	'address'=>'AL-HP'
         ]);
-    	}
     }
 }

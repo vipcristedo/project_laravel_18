@@ -89,6 +89,7 @@ class ProductController extends Controller
                 $image1->product_id = $product->id;
                 $image1->type = $image->getClientOriginalExtension();
                 $image1->size = $image->getClientSize();
+                $image1->user_id = Auth::user()->id;
                 $image->storeAs('public/images',time().$image->getClientOriginalName());
                 $image1->save();
             }
@@ -123,6 +124,7 @@ class ProductController extends Controller
                 $image1->product_id = $product->id;
                 $image1->type = $image->getClientOriginalExtension();
                 $image1->size = $image->getClientSize();
+                $image1->user_id = Auth::user()->id;
                 $image->storeAs('public/images',time().$image->getClientOriginalName());
                 $image1->save();
             }
@@ -180,15 +182,7 @@ class ProductController extends Controller
     }
     public function destroy($id){
         $product= Product::findOrFail($id);
-        Session::flash('msg', 'Xóa Sản phẩm '.$product->name.' thành công');
         $product->delete();
-
-        return redirect()->route('backend.product.index');
-    }
-
-    public function test(){
-        Storage::disk('local/test')->put('test1.txt', 'hoan');
-        dd('oki ');
     }
 
     public function validateImage($images){

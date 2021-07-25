@@ -5,11 +5,11 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Image extends Model
+class Contact extends Model
 {
-    protected $table='images';
+    protected $table='contacts';
     use SoftDeletes;
     protected $fillable=[
-    	'name','type','size','category_id','user_id','product_id'
+    	'name','mail','phone','subject', 'message'
     ];
 }

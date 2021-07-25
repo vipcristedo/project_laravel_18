@@ -44,6 +44,14 @@ Sản phẩm {{ $product->name }}
 						</div>
 					</div>
 				</div>
+				
+				<div class="col-md-12" style="padding: 30px 0 0 0">
+					<h3>Bình luận</h3>
+				
+			    	<div id="fb-root"></div>
+                    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v7.0" nonce="vCUppsI8"></script>
+                    <div class="fb-comments" data-href="{{ route('frontend.product.show', $product->id) }}" data-numposts="1" data-width="500"></div>
+				</div>
 				<div class="clearfix"> </div>
 			</div>
 		</div>

@@ -16,7 +16,7 @@ class UserController extends Controller
 
         $users = \App\User::orderByRaw('id asc');
         if($request->key){
-            $users = $users->where('name', 'like', '%'.$request->key.'%')->orWhere('id', 'like', '%'.$request->key.'%');
+            $users = $users->where('name', 'like', '%'.$request->key.'%')->orWhere('id', 'like', '%'.$request->key.'%')->orWhere('email', 'like', '%'.$request->key.'%');
         }
         $users = $users->paginate(15);
         if($request->key){
@@ -109,8 +109,6 @@ class UserController extends Controller
     }
     public function destroy($id){
         $user = User::findOrFail($id);
-        Session::flash('msg', 'Xóa người dùng '.$user->name.' thành công');
         $user->delete();
-        return redirect()->route('backend.user.index');
     }
 }

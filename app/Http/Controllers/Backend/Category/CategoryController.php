@@ -103,9 +103,7 @@ class CategoryController extends Controller
 
     public function destroy($id){
     	$category = Category::findOrFail($id);
-        Session::flash('msg', 'Xóa danh mục '.$category->name.' thành công');
     	$category->delete();
-        return redirect()->route('backend.category.index');
     }
 
     public function showProducts($category_id){

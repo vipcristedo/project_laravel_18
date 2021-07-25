@@ -42,23 +42,14 @@ class HomeController extends Controller
         ]);
     }
     public function show(){
-        // if(Cache::has('key')){
-        //     $category = Cache::get('key');
-        // }else{
-        //     $category = Category::all();
-        // }
-        // $value = Cache::increment('view',1);
-        // return $value;
-        // $value = Cache::pull('view');
-        // $value = Cache::forget('view');
-        // $view = Cache::get('view');
-        // dd($view);
-
     	return view('frontend.product.show');
     }
 
-    public function about(){
-    	return view('frontend.about');
+    public function contact(){
+    	return view('frontend.contact');
+    }
+    public function submitContact(){
+        return view('frontend.contact');
     }
 
     public function checkout(){

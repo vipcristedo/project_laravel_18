@@ -51,13 +51,13 @@ Check Out
 				@endif
 			</div>
 			<div class="checkout-left">	
-				<div class="col-md-4 checkout-left-basket">
+				<div class="col-md-4 checkout-left-basket" style="padding: 0px; border: #84c639 solid 2px;">
 					<h4>hóa đơn</h4>
-					<ul>
+					<ul style="padding: 0px 10px;">
 						@foreach($cart as $cartItem)
-						<li>{{ $cartItem->name }} x{{ $cartItem->qty }} <span>{{ number_format($cartItem->price*$cartItem->qty)}}VNĐ </span></li>
+						<li>{{ $cartItem->name }} x{{ $cartItem->qty }} <span style="font-weight: bold;">{{ number_format($cartItem->price*$cartItem->qty)}}VNĐ </span></li>
 						@endforeach
-						<li>Total <i>-</i> <span>{{ number_format(\Cart::total()) }}VNĐ</span></li>
+						<li style="border-top: #84c639 solid 2px; padding: 10px 0px;">Tổng cộng <i>-</i> <span style="font-weight: bold;">{{ number_format(\Cart::total()) }}VNĐ</span></li>
 					</ul>
 				</div>
 				<div class="col-md-8 address_form_agile">

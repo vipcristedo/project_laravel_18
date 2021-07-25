@@ -7,9 +7,9 @@ Danh sách hạng mục
 @endsection
 @section('js')
 <script type="text/javascript">
-    function deleteCategory(id){
+    function deleteContact(id){
         swal({
-          title: "Bạn có chắc muốn xóa danh mục này không?",
+          title: "Bạn có chắc muốn xóa liên hệ này không?",
           text: "Hành động không thể hoàn tác",
           icon: "warning",
           buttons: true,
@@ -19,7 +19,7 @@ Danh sách hạng mục
             if (willDelete) {
                 $.ajax({
                     type: "POST",
-                    url: "/admin/category/delete/"+id,
+                    url: "/admin/contact/delete/"+id,
                     data : {'_method' : 'DELETE', '_token' : '{{ csrf_token() }}'},
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -52,12 +52,12 @@ Danh sách hạng mục
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark">Danh sách danh mục</h1>
+                <h1 class="m-0 text-dark">Danh sách liên hệ</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Danh sách danh mục</li>
+                    <li class="breadcrumb-item active">Danh sách liên hệ</li>
                 </ol>
             </div><!-- /.col -->
         </div>
@@ -73,9 +73,6 @@ Danh sách hạng mục
                 <div class="alert alert-danger">{{ Session::get('msg') }}</div>
                 @endif
                 <div class="card">
-                    <div class="card-header">
-                        <a href="{{ route('backend.category.create') }}" class="btn btn-primary">Tạo mới</a>
-                    </div>
                     <!-- /.card-header -->
                     <div class="card-body table-responsive p-0">
                         <table class="table table-hover">
@@ -83,33 +80,28 @@ Danh sách hạng mục
                             <tr>
                                 <th>ID</th>
                                 <th>Tên danh mục</th>
-                                <th>Thời gian tạo</th>
-                                <th>Danh mục cha</th>
+                                <th>Thời gian</th>
                                 <th>Act</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($categories as $category)
+                            @foreach($contacts as $contact)
                             <tr>
-                                <td>{{$category->id}}</td>
-                                <td><a href="{{ route('backend.category.show',$category->id)}}">{{$category->name}}</a></td>
-                                <td>{{$category->created_at}}</td>
-                                <td>{{$category->parent_id}}</td>
+                                <td>{{$contact->id}}</td>
+                                <td><a href="{{ route('backend.contact.show',$contact->id)}}">{{$contact->name}}</a></td>
+                                <td>{{$contact->created_at}}</td>
+                                <td>{{$contact->parent_id}}</td>
                                 <td>
-                                    <a href="{{ route('backend.category.edit',$category->id)}}" class="btn btn-info">Sửa</a>
-                                    <a href="{{ route('backend.category.showProducts',$category->id)}}" class="btn btn-success">Sản phẩm</a>
-                                    
-                                    @can('delete',$category)
-                                    <button class="btn btn-warning" data-toggle="tooltip" title="Xóa" onclick="event.preventDefault();deleteCategory({{ $category->id }})" >
+                                    <a href="{{ route('backend.contact.show',$contact->id)}}" class="btn btn-success">Chi tiết</a>
+                                    <button class="btn btn-warning" data-toggle="tooltip" title="Xóa" onclick="event.preventDefault();deleteContact({{ $contact->id }})" >
                                         <i class="fa fa-btn fa-trash"></i>Xoá
                                     </button>
-                                    @endcan
                                 </td>
                             </tr>
                             @endforeach
                             </tbody>
                         </table>
-                        {!! $categories->links('vendor.pagination.bootstrap-4') !!}
+                        {!! $contacts->links('vendor.pagination.bootstrap-4') !!}
                     </div>
                     <!-- /.card-body -->
                 </div>

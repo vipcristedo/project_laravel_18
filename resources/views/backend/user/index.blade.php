@@ -6,7 +6,46 @@ Danh sách người dùng
     
 @endsection
 @section('js')
-
+<script type="text/javascript">
+    function deleteUser(id){
+        swal({
+          title: "Bạn có chắc muốn xóa người dùng này không?",
+          text: "Hành động không thể hoàn tác",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+                $.ajax({
+                    type: "POST",
+                    url: "/admin/user/delete/"+id,
+                    data : {'_method' : 'DELETE', '_token' : '{{ csrf_token() }}'},
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(response) {
+                        swal({
+                            title : "Xóa thành công",
+                            icon : "success",
+                            button : "Done",
+                        }).then(() => {
+                            location.reload();
+                        });
+                    },
+                    error: function(data) {
+                        swal({
+                            title : "Xóa thất bại",
+                            icon : "warning",
+                        });
+                    }
+                });
+            } else {
+                swal("Hủy thành công!");
+            }
+        });
+    }
+</script>
 @endsection
 @section('content-header')
         <div class="content-header">
@@ -75,19 +114,15 @@ Danh sách người dùng
                                 @endif
                                 </td>
                                 <td>
-                                <form action="{{ route('backend.user.delete', $user->id ) }}" method="POST">
-                                    {{ csrf_field() }}
-                                    {{ method_field('DELETE') }}
                                     <a href="{{ route('backend.user.showProducts',$user->id)}}" class="btn btn-success">Sản phẩm</a>
                                     @can('update',$user)
                                     <a href="{{ route('backend.user.edit',$user->id)}}" class="btn btn-info">Sửa</a>
                                     @endcan
                                     @can('delete',$user)
-                                    <button type="submit" class="btn btn-warning">
+                                    <button class="btn btn-warning" data-toggle="tooltip" title="Xóa" onclick="event.preventDefault();deleteUser({{ $user->id }})" >
                                         <i class="fa fa-btn fa-trash"></i>Xoá
                                     </button>
                                     @endcan
-                                </form>
                                 </td>
                             </tr>
                             @endif

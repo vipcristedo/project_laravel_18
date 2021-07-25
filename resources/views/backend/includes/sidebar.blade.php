@@ -34,6 +34,29 @@
                     </li>
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
+                            <i class="fa fa-users" aria-hidden="true"></i>
+                            <p>
+                                Quản lý người dùng
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ route('backend.user.create') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Tạo mới</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('backend.user.index') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Danh sách</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-shopping-basket"></i>
                             <p>
                                 Quản lý sản phẩm
@@ -81,29 +104,6 @@
                     </li>
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
-                            <i class="fa fa-users" aria-hidden="true"></i>
-                            <p>
-                                Quản lý người dùng
-                                <i class="fas fa-angle-left right"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="{{ route('backend.user.create') }}" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Tạo mới</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('backend.user.index') }}" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Danh sách</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item has-treeview">
-                        <a href="#" class="nav-link">
                             <i class="fa fa-list-alt" aria-hidden="true"></i>
                             <p>
                                 Quản lý đơn hàng
@@ -121,6 +121,23 @@
                                 <a href="{{ route('backend.order.newOrders') }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Đơn chưa xác nhận</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="fa fa-list-alt" aria-hidden="true"></i>
+                            <p>
+                                Quản lý liên hệ
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ route('backend.contact.index') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Tất cả liên hệ</p>
                                 </a>
                             </li>
                         </ul>
